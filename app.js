@@ -1,3 +1,11 @@
+window.onload = initApp
+
+function initApp() {
+  setScene()
+  setColor()
+  addEventListeners()
+}
+
 // state
 let currentRoom = 0
 const SCENES = [
@@ -38,11 +46,33 @@ const PUZZLES = [
 ]
 const INVENTORY = []
 
+let state = [0, 1, 1, 1, 0, 0]
+
+const mycolors = ["tomato", "green"]
+
+// functions
+function addEventListeners() {
+  const nextRoomBtn = document.getElementById("nextRoom-btn")
+  nextRoomBtn.addEventListener("click", goToNextroom)
+  // every lightswitch button
+  const litbtn1 = document.getElementById("litbtn1")
+  const litbtn2 = document.getElementById("litbtn2")
+  const litbtn3 = document.getElementById("litbtn3")
+  const litbtn4 = document.getElementById("litbtn4")
+  const litbtn5 = document.getElementById("litbtn5")
+  const litbtn6 = document.getElementById("litbtn6")
+  // adding click event on every lightswitch button
+  litbtn1.addEventListener("click", someFunction1)
+  litbtn2.addEventListener("click", someFunction2)
+  litbtn3.addEventListener("click", someFunction3)
+  litbtn4.addEventListener("click", someFunction4)
+  litbtn5.addEventListener("click", someFunction5)
+  litbtn6.addEventListener("click", someFunction6)
+}
+
 function getGoTos() {
   return SCENES[currentRoom].goTos
 }
-
-setScene()
 
 function setScene() {
   const roomTitleEl = document.getElementById("room-title")
@@ -53,8 +83,6 @@ function setScene() {
   roomTitleEl.textContent = setTitle
   roomSettingEl.textContent = setRoomSetting
 }
-const nextRoomBtn = document.getElementById("nextRoom-btn")
-nextRoomBtn.addEventListener("click", goToNextroom)
 
 function goToNextroom() {
   const nextRoom = SCENES[currentRoom].nextRoom
@@ -63,3 +91,43 @@ function goToNextroom() {
 }
 
 // setup puzzle functionality
+
+// lightswitch functionality
+
+function addvector(a, b) {
+  return a.map((e, i) => e + b[i])
+}
+
+function someFunction1() {
+  state = addvector(state, [1, 1, 0, 1, 0, 0])
+  setColor()
+}
+function someFunction2() {
+  state = addvector(state, [1, 1, 1, 0, 1, 0])
+  setColor()
+}
+function someFunction3() {
+  state = addvector(state, [0, 1, 1, 0, 0, 1])
+  setColor()
+}
+function someFunction4() {
+  state = addvector(state, [1, 0, 0, 1, 1, 0])
+  setColor()
+}
+function someFunction5() {
+  state = addvector(state, [0, 1, 0, 1, 1, 1])
+  setColor()
+}
+function someFunction6() {
+  state = addvector(state, [0, 0, 1, 0, 1, 1])
+  setColor()
+}
+
+function setColor() {
+  litbtn1.style.backgroundColor = mycolors[state[0] % 2]
+  litbtn2.style.backgroundColor = mycolors[state[1] % 2]
+  litbtn3.style.backgroundColor = mycolors[state[2] % 2]
+  litbtn4.style.backgroundColor = mycolors[state[3] % 2]
+  litbtn5.style.backgroundColor = mycolors[state[4] % 2]
+  litbtn6.style.backgroundColor = mycolors[state[5] % 2]
+}
