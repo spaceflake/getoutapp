@@ -61,3 +61,5 @@ function goToNextroom() {
   currentRoom = nextRoom
   setScene()
 }
+
+// setup puzzle functionality
