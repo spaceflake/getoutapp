@@ -1,4 +1,4 @@
-const currentRoom = 0
+const currentRoom = 1
 const SCENES = [
   {
     title: "entry",
@@ -12,7 +12,17 @@ const SCENES = [
 const INVENTORY = []
 
 function getGoTos() {
-  console.log(SCENES[currentRoom].goTos)
+  return SCENES[currentRoom].goTos
 }
 
 getGoTos()
+
+function setScene() {
+  const roomTitleEl = document.getElementById("room-title")
+  const roomSettingEl = document.getElementById("room-setting")
+
+  roomTitleEl.textContent = SCENES[currentRoom].title
+  roomSettingEl.textContent = "sometext"
+}
+
+setScene()
