@@ -10,7 +10,14 @@ function initApp() {
 let currentRoom = 0
 const SCENES = [
   {
-    title: "entry",
+    title: "the interview",
+    roomSetting:
+      "This is a dark room. You see an old computer in the corner of the room.",
+    goTos: ["computer", "door", "keypad"],
+    nextRoom: 1,
+  },
+  {
+    title: "villa entry",
     roomSetting:
       "This is a dark room. You see an old computer in the corner of the room.",
     goTos: ["computer", "door", "keypad"],
@@ -46,28 +53,45 @@ const PUZZLES = [
 ]
 const INVENTORY = []
 
-let state = [0, 1, 1, 1, 0, 0]
-
+// starting order for the lightswitch puzzle. Where 1 is on(green) and 0 is off(red)
+let lightSwitchStates = [0, 1, 1, 1, 0, 0]
 const mycolors = ["tomato", "green"]
+
+function checkEndConditionOfLightSwitches() {
+  const isAllOn = lightSwitchStates.every((num) => num % 2)
+  const isAllOff = lightSwitchStates.every((num) => num % 2 === 0)
+  if (isAllOn) {
+    console.log("great all is on")
+  } else if (isAllOff) {
+    console.log("great all is off")
+  } else {
+    console.log("keep playing")
+  }
+}
 
 // functions
 function addEventListeners() {
   const nextRoomBtn = document.getElementById("nextRoom-btn")
   nextRoomBtn.addEventListener("click", goToNextroom)
   // every lightswitch button
-  const litbtn1 = document.getElementById("litbtn1")
-  const litbtn2 = document.getElementById("litbtn2")
-  const litbtn3 = document.getElementById("litbtn3")
-  const litbtn4 = document.getElementById("litbtn4")
-  const litbtn5 = document.getElementById("litbtn5")
-  const litbtn6 = document.getElementById("litbtn6")
-  // adding click event on every lightswitch button
-  litbtn1.addEventListener("click", someFunction1)
-  litbtn2.addEventListener("click", someFunction2)
-  litbtn3.addEventListener("click", someFunction3)
-  litbtn4.addEventListener("click", someFunction4)
-  litbtn5.addEventListener("click", someFunction5)
-  litbtn6.addEventListener("click", someFunction6)
+  const litbtn1 = document
+    .getElementById("litbtn1")
+    .addEventListener("click", someFunction1)
+  const litbtn2 = document
+    .getElementById("litbtn2")
+    .addEventListener("click", someFunction2)
+  const litbtn3 = document
+    .getElementById("litbtn3")
+    .addEventListener("click", someFunction3)
+  const litbtn4 = document
+    .getElementById("litbtn4")
+    .addEventListener("click", someFunction4)
+  const litbtn5 = document
+    .getElementById("litbtn5")
+    .addEventListener("click", someFunction5)
+  const litbtn6 = document
+    .getElementById("litbtn6")
+    .addEventListener("click", someFunction6)
 }
 
 function getGoTos() {
@@ -99,35 +123,41 @@ function addvector(a, b) {
 }
 
 function someFunction1() {
-  state = addvector(state, [1, 1, 0, 1, 0, 0])
+  lightSwitchStates = addvector(lightSwitchStates, [1, 1, 0, 1, 0, 0])
   setColor()
+  checkEndConditionOfLightSwitches()
 }
 function someFunction2() {
-  state = addvector(state, [1, 1, 1, 0, 1, 0])
+  lightSwitchStates = addvector(lightSwitchStates, [1, 1, 1, 0, 1, 0])
   setColor()
+  checkEndConditionOfLightSwitches()
 }
 function someFunction3() {
-  state = addvector(state, [0, 1, 1, 0, 0, 1])
+  lightSwitchStates = addvector(lightSwitchStates, [0, 1, 1, 0, 0, 1])
   setColor()
+  checkEndConditionOfLightSwitches()
 }
 function someFunction4() {
-  state = addvector(state, [1, 0, 0, 1, 1, 0])
+  lightSwitchStates = addvector(lightSwitchStates, [1, 0, 0, 1, 1, 0])
   setColor()
+  checkEndConditionOfLightSwitches()
 }
 function someFunction5() {
-  state = addvector(state, [0, 1, 0, 1, 1, 1])
+  lightSwitchStates = addvector(lightSwitchStates, [0, 1, 0, 1, 1, 1])
   setColor()
+  checkEndConditionOfLightSwitches()
 }
 function someFunction6() {
-  state = addvector(state, [0, 0, 1, 0, 1, 1])
+  lightSwitchStates = addvector(lightSwitchStates, [0, 0, 1, 0, 1, 1])
   setColor()
+  checkEndConditionOfLightSwitches()
 }
 
 function setColor() {
-  litbtn1.style.backgroundColor = mycolors[state[0] % 2]
-  litbtn2.style.backgroundColor = mycolors[state[1] % 2]
-  litbtn3.style.backgroundColor = mycolors[state[2] % 2]
-  litbtn4.style.backgroundColor = mycolors[state[3] % 2]
-  litbtn5.style.backgroundColor = mycolors[state[4] % 2]
-  litbtn6.style.backgroundColor = mycolors[state[5] % 2]
+  litbtn1.style.backgroundColor = mycolors[lightSwitchStates[0] % 2]
+  litbtn2.style.backgroundColor = mycolors[lightSwitchStates[1] % 2]
+  litbtn3.style.backgroundColor = mycolors[lightSwitchStates[2] % 2]
+  litbtn4.style.backgroundColor = mycolors[lightSwitchStates[3] % 2]
+  litbtn5.style.backgroundColor = mycolors[lightSwitchStates[4] % 2]
+  litbtn6.style.backgroundColor = mycolors[lightSwitchStates[5] % 2]
 }
