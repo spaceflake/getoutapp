@@ -11,20 +11,54 @@ let currentRoom = 0
 const SCENES = [
   {
     title: "the interview",
+    img: "pathToImg - ?",
     roomSetting:
-      "This is a dark room. You see an old computer in the corner of the room.",
-    goTos: ["computer", "door", "keypad"],
+      "So here you are again sitting in an office, wating to be called in for a job interview. Let´s hope all goes well this time. After sitting here for some time now the secretary finally shows signs of life and lets you know that Mr.Black will see you now.",
+    goTos: ["Enter the office"],
     nextRoom: 1,
   },
   {
-    title: "villa entry",
+    title: "the interview",
+    img: "pathToImg - ?",
     roomSetting:
-      "This is a dark room. You see an old computer in the corner of the room.",
-    goTos: ["computer", "door", "keypad"],
+      "As you enter the office, you notice the black marble floors and walls. While beautiful and elegant. It seems to absorb the light entering the room, leaving it dark and mysterious. Mr.Black acknoledges you and ask you to take a seat.",
+    goTos: ["Sit down"],
     nextRoom: 2,
   },
   {
-    title: "light switch",
+    title: "the interview",
+    img: "images/mrblack.jpg",
+    roomSetting:
+      "As you enter the office, you notice the black marble floors and walls. While beautiful and elegant. It seems to absorb the light entering the room, leaving it dark and mysterious. Mr.Black acknoledges you and ask you to take a seat.",
+    goTos: ["Sit down"],
+    nextRoom: 3,
+  },
+  {
+    title: "the interview",
+    img: "images/mrblack.jpg",
+    roomSetting:
+      "Mr.Black finishing up whatever he was doing at the computer. Looks at you for a moment and asks - Who are you? [load name input element and update string with'Im [name]. I am here for the interview.'] Mr.Black replies  Haha, an interview now. I don't have time for that. He looks for a piece of paper and writes something down and hands it to you. He says afterwards - Go to that adress at that time. We'll see about that interview then. Now leave please.",
+    goTos: ["Leave the office"],
+    nextRoom: 4,
+  },
+  {
+    title: "Villa Enigma",
+    img: "pathToImg-mansion",
+    roomSetting:
+      "You arrive a bit early to the adress from the note. What you face is magnificent. You approach with awe and as you get closer you can see the front door is wide open. That is a bit strange, but you are at the right adress and at the right time.",
+    goTos: ["Enter the Villa"],
+    nextRoom: 5,
+  },
+  {
+    title: "Villa Enigma",
+    img: "pathToImg-mansion",
+    roomSetting:
+      "You arrive a bit early to the adress from the note. What you face is magnificent. You approach with awe and as you get closer you can see the front door is wide open. That is a bit strange, but you are at the right adress and at the right time.",
+    goTos: ["Enter the Villa"],
+    nextRoom: 6,
+  },
+  {
+    title: "The Library",
     roomSetting:
       "Another dark room. There is a small table in the middle of the room with a device on it. It seems there is 6 buttons on it. Some are lit",
     goTos: ["switch board"],
@@ -51,11 +85,10 @@ const PUZZLES = [
     isAnswerCorrect: false,
   },
 ]
-const INVENTORY = []
 
 // starting order for the lightswitch puzzle. Where 1 is on(green) and 0 is off(red)
 let lightSwitchStates = [0, 1, 1, 1, 0, 0]
-const mycolors = ["tomato", "green"]
+const onOffColors = ["tomato", "green"]
 
 function checkEndConditionOfLightSwitches() {
   const isAllOn = lightSwitchStates.every((num) => num % 2)
@@ -71,6 +104,9 @@ function checkEndConditionOfLightSwitches() {
 
 // functions
 function addEventListeners() {
+  const lookBtn = document
+    .getElementById("look-btn")
+    .addEventListener("click", setLookAround)
   const nextRoomBtn = document
     .getElementById("nextRoom-btn")
     .addEventListener("click", goToNextroom)
@@ -99,6 +135,10 @@ function getGoTos() {
   return SCENES[currentRoom].goTos
 }
 
+function setLookAround() {
+  console.log("looked")
+}
+
 function setScene() {
   const roomTitleEl = document.getElementById("room-title")
   const roomSettingEl = document.getElementById("room-setting")
@@ -113,6 +153,7 @@ function goToNextroom() {
   const nextRoom = SCENES[currentRoom].nextRoom
   currentRoom = nextRoom
   setScene()
+  console.log(currentRoom)
 }
 
 // setup puzzle functionality
@@ -155,10 +196,10 @@ function someFunction6() {
 }
 
 function setColor() {
-  litbtn1.style.backgroundColor = mycolors[lightSwitchStates[0] % 2]
-  litbtn2.style.backgroundColor = mycolors[lightSwitchStates[1] % 2]
-  litbtn3.style.backgroundColor = mycolors[lightSwitchStates[2] % 2]
-  litbtn4.style.backgroundColor = mycolors[lightSwitchStates[3] % 2]
-  litbtn5.style.backgroundColor = mycolors[lightSwitchStates[4] % 2]
-  litbtn6.style.backgroundColor = mycolors[lightSwitchStates[5] % 2]
+  litbtn1.style.backgroundColor = onOffColors[lightSwitchStates[0] % 2]
+  litbtn2.style.backgroundColor = onOffColors[lightSwitchStates[1] % 2]
+  litbtn3.style.backgroundColor = onOffColors[lightSwitchStates[2] % 2]
+  litbtn4.style.backgroundColor = onOffColors[lightSwitchStates[3] % 2]
+  litbtn5.style.backgroundColor = onOffColors[lightSwitchStates[4] % 2]
+  litbtn6.style.backgroundColor = onOffColors[lightSwitchStates[5] % 2]
 }
