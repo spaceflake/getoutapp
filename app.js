@@ -12,7 +12,7 @@ const SCENES = [
   {
     title: "the interview",
     img: "pathToImg - ?",
-    roomSetting:
+    sceneSetting:
       "So here you are again sitting in an office, wating to be called in for a job interview. Let´s hope all goes well this time. After sitting here for some time now the secretary finally shows signs of life and lets you know that Mr.Black will see you now.",
     goTos: ["Enter the office"],
     nextRoom: 1,
@@ -20,7 +20,7 @@ const SCENES = [
   {
     title: "the interview",
     img: "pathToImg - ?",
-    roomSetting:
+    sceneSetting:
       "As you enter the office, you notice the black marble floors and walls. While beautiful and elegant. It seems to absorb the light entering the room, leaving it dark and mysterious. Mr.Black acknoledges you and ask you to take a seat.",
     goTos: ["Sit down"],
     nextRoom: 2,
@@ -28,7 +28,7 @@ const SCENES = [
   {
     title: "the interview",
     img: "images/mrblack.jpg",
-    roomSetting:
+    sceneSetting:
       "As you enter the office, you notice the black marble floors and walls. While beautiful and elegant. It seems to absorb the light entering the room, leaving it dark and mysterious. Mr.Black acknoledges you and ask you to take a seat.",
     goTos: ["Sit down"],
     nextRoom: 3,
@@ -36,7 +36,7 @@ const SCENES = [
   {
     title: "the interview",
     img: "images/mrblack.jpg",
-    roomSetting:
+    sceneSetting:
       "Mr.Black finishing up whatever he was doing at the computer. Looks at you for a moment and asks - Who are you? [load name input element and update string with'Im [name]. I am here for the interview.'] Mr.Black replies  Haha, an interview now. I don't have time for that. He looks for a piece of paper and writes something down and hands it to you. He says afterwards - Go to that adress at that time. We'll see about that interview then. Now leave please.",
     goTos: ["Leave the office"],
     nextRoom: 4,
@@ -44,22 +44,30 @@ const SCENES = [
   {
     title: "Villa Enigma",
     img: "pathToImg-mansion",
-    roomSetting:
+    sceneSetting:
       "You arrive a bit early to the adress from the note. What you face is magnificent. You approach with awe and as you get closer you can see the front door is wide open. That is a bit strange, but you are at the right adress and at the right time.",
     goTos: ["Enter the Villa"],
     nextRoom: 5,
   },
   {
-    title: "Villa Enigma",
-    img: "pathToImg-mansion",
-    roomSetting:
-      "You arrive a bit early to the adress from the note. What you face is magnificent. You approach with awe and as you get closer you can see the front door is wide open. That is a bit strange, but you are at the right adress and at the right time.",
-    goTos: ["Enter the Villa"],
+    title: "Hallway",
+    img: "pathToImg-hallway",
+    sceneSetting:
+      "You enter the hallway. It's very elegant. There are a few doors on the sides with numbers on them you also see a little table in the middle with a folded letter on it. As you get closer, you can see [playerName] written on it. You unfold it and it reads. Welcome to your interview [playerName], proceed to door 1.",
+    goTos: ["Enter door 1"],
     nextRoom: 6,
   },
   {
+    title: "The Office",
+    img: "pathToImg-theOffice",
+    sceneSetting:
+      "You enter the hallway. It's very elegant. There are a few doors on the sides with numbers on them you also see a little table in the middle with a folded letter on it. As you get closer, you can see [playerName] written on it. You unfold it and it reads. Welcome to your interview [playerName], proceed to door 1.",
+    goTos: ["computer"],
+    nextRoom: 7,
+  },
+  {
     title: "The Library",
-    roomSetting:
+    sceneSetting:
       "Another dark room. There is a small table in the middle of the room with a device on it. It seems there is 6 buttons on it. Some are lit",
     goTos: ["switch board"],
     nextRoom: 0,
@@ -141,12 +149,12 @@ function setLookAround() {
 
 function setScene() {
   const roomTitleEl = document.getElementById("room-title")
-  const roomSettingEl = document.getElementById("room-setting")
+  const sceneSettingEl = document.getElementById("room-setting")
   const setTitle = SCENES[currentRoom].title
-  const setRoomSetting = SCENES[currentRoom].roomSetting
+  const setsceneSetting = SCENES[currentRoom].sceneSetting
 
   roomTitleEl.textContent = setTitle
-  roomSettingEl.textContent = setRoomSetting
+  sceneSettingEl.textContent = setsceneSetting
 }
 
 function goToNextroom() {
