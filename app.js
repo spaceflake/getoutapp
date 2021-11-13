@@ -21,7 +21,7 @@ const SCENES = [
     roomSetting:
       "This is a dark room. You see an old computer in the corner of the room.",
     goTos: ["computer", "door", "keypad"],
-    nextRoom: 1,
+    nextRoom: 2,
   },
   {
     title: "light switch",
@@ -71,8 +71,9 @@ function checkEndConditionOfLightSwitches() {
 
 // functions
 function addEventListeners() {
-  const nextRoomBtn = document.getElementById("nextRoom-btn")
-  nextRoomBtn.addEventListener("click", goToNextroom)
+  const nextRoomBtn = document
+    .getElementById("nextRoom-btn")
+    .addEventListener("click", goToNextroom)
   // every lightswitch button
   const litbtn1 = document
     .getElementById("litbtn1")
