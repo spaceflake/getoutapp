@@ -52,7 +52,8 @@ const SCENES = [
       {
         btnTxt: "Enter your name",
         btnFunction: function () {
-          showElement()
+          showElement(formEl)
+          hideElement(nextRoomBtn)
         },
       },
       {
@@ -161,24 +162,25 @@ const PUZZLES = [
     isAnswerCorrect: false,
   },
 ]
+const roomTitleEl = document.getElementById("room-title")
+const sceneSettingEl = document.getElementById("room-setting")
+const nextRoomBtn = document.getElementById("nextRoom-btn")
+const formEl = document.getElementById("input-form")
 
 function setScene(SCENES, i = 0) {
-  const roomTitleEl = document.getElementById("room-title")
-  const sceneSettingEl = document.getElementById("room-setting")
   roomTitleEl.innerText = SCENES.title
   sceneSettingEl.innerText = SCENES.sceneSetting
 
-  const nextRoomBtn = document.getElementById("nextRoom-btn")
   nextRoomBtn.onclick = SCENES.goTos[i].btnFunction
 
   nextRoomBtn.innerText = SCENES.goTos[i].btnTxt
 }
 
-const formEl = document.getElementById("input-form")
-
-function showElement() {
-  formEl.classList.remove("hidden")
-  nextRoomBtn = document.getElementById("nextRoom-btn").classList.add("hidden")
+function showElement(element) {
+  element.classList.remove("hidden")
+}
+function hideElement(element) {
+  element.classList.add("hidden")
 }
 
 function handleInput() {
@@ -187,10 +189,8 @@ function handleInput() {
   dialog.innerHTML = `Im <span class='text-blue-400'>${inputValue}</span>. I am here for the interview.
   <br> <p class='text-gray-400'>Mr.Black replies</p> - "Haha, an interview now. I don't have time for that." <br> <p class='text-gray-400'>He looks for a piece of paper and writes something down and hands it to you.<br> He says afterwards</p><br> - "Go to that adress at that time. We'll see about that interview then. Now leave please."`
   userName = inputValue
-  formEl.classList.add("hidden")
-  nextRoomBtn = document
-    .getElementById("nextRoom-btn")
-    .classList.remove("hidden")
+  hideElement(formEl)
+  showElement(nextRoomBtn)
   setScene(SCENES[2], (i = 1))
 }
 
