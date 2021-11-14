@@ -1,78 +1,146 @@
 window.onload = initApp
 
 function initApp() {
-  setScene()
+  setScene(SCENES[0])
   setColor()
   addEventListeners()
+  const form = document.querySelector("#input-form")
+  form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    handleInput()
+  })
 }
 
 // state
-let currentRoom = 0
+let userName = ""
 const SCENES = [
   {
     title: "the interview",
     img: "pathToImg - ?",
     sceneSetting:
-      "So here you are again sitting in an office, wating to be called in for a job interview. Let´s hope all goes well this time. After sitting here for some time now the secretary finally shows signs of life and lets you know that Mr.Black will see you now.",
-    goTos: ["Enter the office"],
+      "So here you are again sitting in an office, waiting to be called in for a job interview. Let´s hope all goes well this time. After sitting here for some time now the secretary finally shows signs of life and lets you know that Mr.Black will see you now.",
+    goTos: [
+      {
+        btnTxt: "Enter the office",
+        btnFunction: function () {
+          setScene(SCENES[1])
+        },
+      },
+    ],
     nextRoom: 1,
   },
   {
     title: "the interview",
     img: "pathToImg - ?",
     sceneSetting:
-      "As you enter the office, you notice the black marble floors and walls. While beautiful and elegant. It seems to absorb the light entering the room, leaving it dark and mysterious. Mr.Black acknoledges you and ask you to take a seat.",
-    goTos: ["Sit down"],
+      "As you enter the office, you notice the black marble floors and walls. While beautiful and elegant it seems to absorb the light entering the room, leaving it dark and mysterious. Mr.Black acknowledged you and ask you to take a seat.",
+    goTos: [
+      {
+        btnTxt: "Sit down",
+        btnFunction: function () {
+          setScene(SCENES[2])
+        },
+      },
+    ],
     nextRoom: 2,
   },
   {
     title: "the interview",
     img: "images/mrblack.jpg",
-    sceneSetting:
-      "As you enter the office, you notice the black marble floors and walls. While beautiful and elegant. It seems to absorb the light entering the room, leaving it dark and mysterious. Mr.Black acknoledges you and ask you to take a seat.",
-    goTos: ["Sit down"],
+    sceneSetting: `Mr.Black finishing up whatever he was doing at the computer. Looks at you for a moment and asks - Who are you?`,
+    goTos: [
+      {
+        btnTxt: "Enter your name",
+        btnFunction: function () {
+          showElement()
+        },
+      },
+      {
+        btnTxt: "Leave the office",
+        btnFunction: function () {
+          const clearDialog = (document.querySelector(
+            "#dialog-el"
+          ).textContent = "")
+          setScene(SCENES[3])
+        },
+      },
+    ],
     nextRoom: 3,
-  },
-  {
-    title: "the interview",
-    img: "images/mrblack.jpg",
-    sceneSetting:
-      "Mr.Black finishing up whatever he was doing at the computer. Looks at you for a moment and asks - Who are you? [load name input element and update string with'Im [name]. I am here for the interview.'] Mr.Black replies  Haha, an interview now. I don't have time for that. He looks for a piece of paper and writes something down and hands it to you. He says afterwards - Go to that adress at that time. We'll see about that interview then. Now leave please.",
-    goTos: ["Leave the office"],
-    nextRoom: 4,
   },
   {
     title: "Villa Enigma",
     img: "pathToImg-mansion",
     sceneSetting:
       "You arrive a bit early to the adress from the note. What you face is magnificent. You approach with awe and as you get closer you can see the front door is wide open. That is a bit strange, but you are at the right adress and at the right time.",
-    goTos: ["Enter the Villa"],
-    nextRoom: 5,
+    goTos: [
+      {
+        btnTxt: "Enter the Villa",
+        btnFunction: function () {
+          setScene(SCENES[4])
+        },
+      },
+    ],
+    nextRoom: 4,
   },
   {
     title: "Hallway",
     img: "pathToImg-hallway",
-    sceneSetting:
-      "You enter the hallway. It's very elegant. There are a few doors on the sides with numbers on them you also see a little table in the middle with a folded letter on it. As you get closer, you can see [playerName] written on it. You unfold it and it reads. Welcome to your interview [playerName], proceed to door 1.",
-    goTos: ["Enter door 1"],
-    nextRoom: 6,
+    sceneSetting: `You enter the hallway. It's very elegant. There are a few doors on the sides with numbers on them you also see a little table in the middle with a folded letter on it. As you get closer, you can see ${userName} written on it. You unfold it and it reads: Welcome to your interview ${userName}, proceed to door 1.`,
+    goTos: [
+      {
+        btnTxt: "Enter door 1",
+        btnFunction: function () {
+          setScene(SCENES[5])
+        },
+      },
+    ],
+    nextRoom: 5,
   },
   {
     title: "The Office",
     img: "pathToImg-theOffice",
     sceneSetting:
-      "You enter the hallway. It's very elegant. There are a few doors on the sides with numbers on them you also see a little table in the middle with a folded letter on it. As you get closer, you can see [playerName] written on it. You unfold it and it reads. Welcome to your interview [playerName], proceed to door 1.",
-    goTos: ["computer"],
+      "This looks like an office. There is desk with a computer on it. ",
+    goTos: [
+      {
+        btnTxt: "Go to the computer",
+        btnFunction: function () {
+          setScene(SCENES[6])
+        },
+      },
+    ],
+    nextRoom: 6,
+  },
+  {
+    title: "The Office",
+    img: "pathToImg-theOffice",
+    sceneSetting: "the computer - puzzle",
+    goTos: [
+      {
+        btnTxt: "something",
+        btnFunction: function () {
+          setScene(SCENES[7])
+        },
+      },
+    ],
     nextRoom: 7,
   },
   {
     title: "The Library",
     sceneSetting:
       "Another dark room. There is a small table in the middle of the room with a device on it. It seems there is 6 buttons on it. Some are lit",
-    goTos: ["switch board"],
+    goTos: [
+      {
+        btnTxt: "go to device",
+        btnFunction: function () {
+          setScene(SCENES[0])
+        },
+      },
+    ],
     nextRoom: 0,
   },
 ]
+
 const PUZZLES = [
   {
     text: "Five people were eating apples, A finished before B, but behind C. D finished before E, but behind B. What was the finishing order?",
@@ -94,6 +162,38 @@ const PUZZLES = [
   },
 ]
 
+function setScene(SCENES, i = 0) {
+  const roomTitleEl = document.getElementById("room-title")
+  const sceneSettingEl = document.getElementById("room-setting")
+  roomTitleEl.innerText = SCENES.title
+  sceneSettingEl.innerText = SCENES.sceneSetting
+
+  const nextRoomBtn = document.getElementById("nextRoom-btn")
+  nextRoomBtn.onclick = SCENES.goTos[i].btnFunction
+
+  nextRoomBtn.innerText = SCENES.goTos[i].btnTxt
+}
+
+const formEl = document.getElementById("input-form")
+
+function showElement() {
+  formEl.classList.remove("hidden")
+  nextRoomBtn = document.getElementById("nextRoom-btn").classList.add("hidden")
+}
+
+function handleInput() {
+  const inputValue = document.querySelector("#answer-El").value
+  const dialog = document.querySelector("#dialog-el")
+  dialog.innerHTML = `Im <span class='text-blue-400'>${inputValue}</span>. I am here for the interview.
+  <br> <p class='text-gray-400'>Mr.Black replies</p> - "Haha, an interview now. I don't have time for that." <br> <p class='text-gray-400'>He looks for a piece of paper and writes something down and hands it to you.<br> He says afterwards</p><br> - "Go to that adress at that time. We'll see about that interview then. Now leave please."`
+  userName = inputValue
+  formEl.classList.add("hidden")
+  nextRoomBtn = document
+    .getElementById("nextRoom-btn")
+    .classList.remove("hidden")
+  setScene(SCENES[2], (i = 1))
+}
+
 // starting order for the lightswitch puzzle. Where 1 is on(green) and 0 is off(red)
 let lightSwitchStates = [0, 1, 1, 1, 0, 0]
 const onOffColors = ["tomato", "green"]
@@ -112,12 +212,6 @@ function checkEndConditionOfLightSwitches() {
 
 // functions
 function addEventListeners() {
-  const lookBtn = document
-    .getElementById("look-btn")
-    .addEventListener("click", setLookAround)
-  const nextRoomBtn = document
-    .getElementById("nextRoom-btn")
-    .addEventListener("click", goToNextroom)
   // every lightswitch button
   const litbtn1 = document
     .getElementById("litbtn1")
@@ -137,31 +231,6 @@ function addEventListeners() {
   const litbtn6 = document
     .getElementById("litbtn6")
     .addEventListener("click", someFunction6)
-}
-
-function getGoTos() {
-  return SCENES[currentRoom].goTos
-}
-
-function setLookAround() {
-  console.log("looked")
-}
-
-function setScene() {
-  const roomTitleEl = document.getElementById("room-title")
-  const sceneSettingEl = document.getElementById("room-setting")
-  const setTitle = SCENES[currentRoom].title
-  const setsceneSetting = SCENES[currentRoom].sceneSetting
-
-  roomTitleEl.textContent = setTitle
-  sceneSettingEl.textContent = setsceneSetting
-}
-
-function goToNextroom() {
-  const nextRoom = SCENES[currentRoom].nextRoom
-  currentRoom = nextRoom
-  setScene()
-  console.log(currentRoom)
 }
 
 // setup puzzle functionality

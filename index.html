@@ -1,40 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="black">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get Out - an interactive story</title>
-  <script src="/app.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <script src="/app.js" defer></script>
 </head>
-<body>
+<body class="h-screen">
   <div>
-    <h2 id="room-title">Title</h2>
-    <img src="" alt="">
-    <p id="room-setting">Room setting</p>
-    <p>Answers</p>
-    <div>
-      <button id="look-btn">LOOK AROUND</button>
-      <button id="goTo-btn">GOTO</button>
-      <button id="nextRoom-btn">NEXT ROOM</button>
+    <div class="container mx-auto flex flex-col h-screen max-w-2xl">
+      <h2 id="room-title" class="text-5xl p-12 uppercase font-black tracking-widest">Title</h2>
+      <img src="" alt="">
+      <p id="room-setting" class="px-12 flex-grow text-gray-400">Room setting</p>
+      <p id="dialog-el" class="px-12 flex-grow"></p>
+      <div data-theme="cyberpunk" class="bg-gray-900 flex-grow mx-12 mt-4 rounded text-green-300 tracking-wider hidden">
+        <p class="p-4"> -Answers</p>
+        <p class="p-4"> -Answers</p>
+        
+      </div>
+      <form id="input-form" class="px-12 mt-4 form-control hidden">
+        <label for="answer-El" class="label">YOUR ANSWER:</label>
+        <div class="relative">
+          <input type="text" name="answer" id="answer-El" class="w-full pr-16 input input-primary input-bordered"/>
+          <button type="submit" class="absolute top-0 right-0 rounded-l-none btn btn-primary">Submit</button>
+        </div>
+      </form>
+      <div>
+        <button id="nextRoom-btn" class="btn btn-outline m-12">NEXT ROOM</button>
+      </div>
     </div>
     <ul id="goTo-list"></ul>
-    <div>
+    <div class="hidden">
       <h2>Logic Puzzle</h2>
       <p id="puzzle-text">puzzle text</p>
-      <form>
-        <label for="answerEl">YOUR ANSWER:</label>
-        <input type="text" name="answer" id="answerEl">
-      </form>
     </div>
-    <div>
-      <button id="litbtn1">1</button>
-      <button id="litbtn2">2</button>
-      <button id="litbtn3">3</button>
+    <div class="px-12 container mx-auto max-w-2xl hidden">
+      <button id="litbtn1" class="w-24 h-24 m-2"></button>
+      <button id="litbtn2" class="w-24 h-24 m-2"></button>
+      <button id="litbtn3" class="w-24 h-24 m-2"></button>
       <br>
-      <button id="litbtn4">4</button>
-      <button id="litbtn5">5</button>
-      <button id="litbtn6">6</button>
+      <button id="litbtn4" class="w-24 h-24 m-2"></button>
+      <button id="litbtn5" class="w-24 h-24 m-2"></button>
+      <button id="litbtn6" class="w-24 h-24 m-2"></button>
     </div>
   </div>
 </body>
