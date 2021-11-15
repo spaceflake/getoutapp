@@ -1,7 +1,7 @@
 window.onload = initApp
 
 function initApp() {
-  setScene(SCENES[0])
+  setScene(SCENES[7])
   setColor()
   setLightSwitchPuzzle()
   const form = document.querySelector("#input-form")
@@ -107,6 +107,9 @@ const SCENES = [
         btnTxt: "Go to the computer",
         btnFunction: function () {
           setScene(SCENES[6])
+          showElement(logicPuzzle)
+          setLogicPuzzle()
+          hideElement(nextRoomBtn)
         },
       },
     ],
@@ -118,8 +121,9 @@ const SCENES = [
     sceneSetting: "the computer - puzzle",
     goTos: [
       {
-        btnTxt: "something",
+        btnTxt: "Go through mysterious door",
         btnFunction: function () {
+          hideElement(logicPuzzle)
           setScene(SCENES[7])
         },
       },
@@ -138,36 +142,38 @@ const SCENES = [
           hideElement(nextRoomBtn)
         },
       },
+      {
+        btnTxt: "next",
+        btnFunction: function () {
+          setScene(SCENES[8])
+          hideElement(litBtnsPuzzle)
+        },
+      },
     ],
-    nextRoom: 0,
+    nextRoom: 8,
+  },
+  {
+    title: "The End",
+    sceneSetting:
+      "You made it through. Well done! I guess you got the job then.",
+    goTos: [
+      {
+        btnTxt: "Play Again?",
+        btnFunction: function () {
+          setScene(SCENES[0])
+        },
+      },
+    ],
+    nextRoom: 8,
   },
 ]
 
-const PUZZLES = [
-  {
-    text: "Five people were eating apples, A finished before B, but behind C. D finished before E, but behind B. What was the finishing order?",
-    answer: "CABDE",
-    isSolved: false,
-    isAnswerCorrect: false,
-  },
-  {
-    text: "The day before two days after the day before tomorrow is Saturday. What day is it today?",
-    answer: "friday",
-    isSolved: false,
-    isAnswerCorrect: false,
-  },
-  {
-    text: "If five cats can catch five mice in five minutes, how many minutes will it take one cat to catch one mouse?",
-    answer: "5",
-    isSolved: false,
-    isAnswerCorrect: false,
-  },
-]
 const roomTitleEl = document.getElementById("room-title")
 const sceneSettingEl = document.getElementById("room-setting")
 const nextRoomBtn = document.getElementById("nextRoom-btn")
 const formEl = document.getElementById("input-form")
 const litBtnsPuzzle = document.getElementById("litBtnsWrapper")
+const logicPuzzle = document.getElementById("logic-puzzle")
 
 function setScene(SCENES, i = 0) {
   roomTitleEl.innerText = SCENES.title
@@ -177,6 +183,7 @@ function setScene(SCENES, i = 0) {
 
   nextRoomBtn.innerText = SCENES.goTos[i].btnTxt
 }
+
 // UTILITY FUNCTIONS
 function showElement(element) {
   element.classList.remove("hidden")
@@ -194,6 +201,55 @@ function handleInput() {
   hideElement(formEl)
   showElement(nextRoomBtn)
   setScene(SCENES[2], (i = 1))
+}
+
+// THE LOGIC PUZZLE
+function setLogicPuzzle() {
+  // get elements - text, input, button
+  const puzzleText = document.querySelector("#puzzle-text")
+
+  const puzzleBtn = document
+    .querySelector("#puzzle-btn")
+    .addEventListener("click", checkInput)
+  // puzzles
+  const PUZZLES = [
+    {
+      text: "Five people were eating apples, A finished before B, but behind C. D finished before E, but behind B. What was the finishing order?",
+      answer: "CABDE",
+      isTried: false,
+      isAnswerCorrect: false,
+    },
+    {
+      text: "The day before two days after the day before tomorrow is Saturday. What day is it today?",
+      answer: "friday",
+      isTried: false,
+      isAnswerCorrect: false,
+    },
+    {
+      text: "If five cats can catch five mice in five minutes, how many minutes will it take one cat to catch one mouse?",
+      answer: "5",
+      isTried: false,
+      isAnswerCorrect: false,
+    },
+  ]
+  puzzleText.textContent = PUZZLES[0].text
+
+  function checkInput() {
+    let text
+    const puzzleAnswer = document.querySelector("#puzzle-answer")
+    let puzzleInput = document.querySelector("#puzzle-input")
+    text = puzzleInput.value.toUpperCase()
+    let tries = 0
+    if (text === PUZZLES[0].answer) {
+      puzzleAnswer.textContent = text + " is correct"
+      PUZZLES[0].isAnswerCorrect = true
+      showElement(nextRoomBtn)
+    } else {
+      puzzleAnswer.textContent = text + " is not the right answer. Try again!"
+      tries++
+    }
+    console.log(tries)
+  }
 }
 
 // lightswitch functionality
@@ -230,10 +286,13 @@ function setLightSwitchPuzzle() {
   function checkEndCondition() {
     const isAllOn = lightSwitchStates.every((num) => num % 2)
     const isAllOff = lightSwitchStates.every((num) => num % 2 === 0)
+
     if (isAllOn) {
-      console.log("great all is on")
+      alert("great all is on")
+      showElement(nextRoomBtn)
+      setScene(SCENES[7], (i = 1))
     } else if (isAllOff) {
-      console.log("great all is off")
+      alert("great all is off")
     } else {
       console.log("keep playing")
     }
