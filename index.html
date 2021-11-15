@@ -11,17 +11,17 @@
 </head>
 <body class="h-screen">
   <div>
-    <div class="container mx-auto flex flex-col h-screen max-w-2xl pb-12">
-      <h2 id="room-title" class="text-5xl p-12 uppercase font-black tracking-widest"></h2>
+    <div class="container mx-auto flex flex-col h-screen max-w-2xl p-12">
+      <h2 id="room-title" class="text-5xl mb-12 uppercase font-black tracking-widest"></h2>
       <img src="" alt="">
-      <p id="room-setting" class="px-12 flex-grow text-gray-400"></p>
-      <p id="dialog-el" class="px-12 flex-grow"></p>
+      <p id="room-setting" class="flex-grow text-gray-400"></p>
+      <p id="dialog-el" class="flex-grow"></p>
       <div data-theme="cyberpunk" class="bg-gray-900 flex-grow mx-12 mt-4 rounded text-green-300 tracking-wider hidden">
         <p class="p-4"> -Answers</p>
         <p class="p-4"> -Answers</p>
         
       </div>
-      <form id="input-form" class="px-12 mt-4 form-control hidden">
+      <form id="input-form" class="mt-4 form-control hidden">
         <label for="answer-El" class="label">YOUR ANSWER:</label>
         <div class="relative">
           <input type="text" name="answer" id="answer-El" class="w-full pr-16 input input-primary input-bordered"/>
@@ -34,7 +34,7 @@
         <p id="puzzle-answer">Your answer</p>
         <button>Check answer</button>
       </div>
-      <div id="litBtnsWrapper" class="px-12 container mx-auto max-w-2xl hidden">
+      <div id="litBtnsWrapper" class="p-4 container mx-auto max-w-2xl mt-6 hidden">
         <button data-btn-nmb="1" id="litbtn1" class="w-24 h-24 m-2"></button>
         <button data-btn-nmb="2" id="litbtn2" class="w-24 h-24 m-2"></button>
         <button data-btn-nmb="3" id="litbtn3" class="w-24 h-24 m-2"></button>
@@ -44,7 +44,7 @@
         <button data-btn-nmb="6" id="litbtn6" class="w-24 h-24 m-2"></button>
       </div>
       <div>
-        <button id="nextRoom-btn" class="btn btn-outline m-12">NEXT ROOM</button>
+        <button id="nextRoom-btn" class="btn btn-outline my-6">NEXT ROOM</button>
       </div>
     </div>
     
