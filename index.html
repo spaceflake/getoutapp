@@ -28,11 +28,19 @@
           <button type="submit" class="absolute top-0 right-0 rounded-l-none btn btn-primary">Submit</button>
         </div>
       </form>
-      <div class="hidden">
-        <h2>Logic Puzzle</h2>
-        <p id="puzzle-text">puzzle text</p>
-        <p id="puzzle-answer">Your answer</p>
-        <button>Check answer</button>
+      <div data-theme="cyberpunk" id="logic-puzzle" class=" bg-gray-700 flex-grow flex flex-col p-4 rounded text-green-300 tracking-wider shadow-inner hidden">
+        <div class="flex-grow">
+          <h2 class="bg-gray-900">Logic Puzzle</h2>
+          <p id="puzzle-text">puzzle text</p>
+        </div>
+        <p id="puzzle-answer"></p>
+        <div class="flex">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 animate-pulse" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+          <input id="puzzle-input" type="text" value="" class="input input-ghost input-xs w-full">
+          <button id="puzzle-btn" class="btn btn-ghost btn-xs">Check answer</button>
+        </div>
       </div>
       <div id="litBtnsWrapper" class="p-4 container mx-auto max-w-2xl mt-6 hidden">
         <button data-btn-nmb="1" id="litbtn1" class="w-24 h-24 m-2"></button>
