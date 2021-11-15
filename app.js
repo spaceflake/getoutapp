@@ -3,7 +3,7 @@ window.onload = initApp
 function initApp() {
   setScene(SCENES[0])
   setColor()
-  addEventListeners()
+  setLightSwitchPuzzle()
   const form = document.querySelector("#input-form")
   form.addEventListener("submit", (e) => {
     e.preventDefault()
@@ -134,7 +134,8 @@ const SCENES = [
       {
         btnTxt: "go to device",
         btnFunction: function () {
-          setScene(SCENES[0])
+          showElement(litBtnsPuzzle)
+          hideElement(nextRoomBtn)
         },
       },
     ],
@@ -166,6 +167,7 @@ const roomTitleEl = document.getElementById("room-title")
 const sceneSettingEl = document.getElementById("room-setting")
 const nextRoomBtn = document.getElementById("nextRoom-btn")
 const formEl = document.getElementById("input-form")
+const litBtnsPuzzle = document.getElementById("litBtnsWrapper")
 
 function setScene(SCENES, i = 0) {
   roomTitleEl.innerText = SCENES.title
@@ -175,7 +177,7 @@ function setScene(SCENES, i = 0) {
 
   nextRoomBtn.innerText = SCENES.goTos[i].btnTxt
 }
-
+// UTILITY FUNCTIONS
 function showElement(element) {
   element.classList.remove("hidden")
 }
@@ -194,85 +196,55 @@ function handleInput() {
   setScene(SCENES[2], (i = 1))
 }
 
+// lightswitch functionality
+
 // starting order for the lightswitch puzzle. Where 1 is on(green) and 0 is off(red)
 let lightSwitchStates = [0, 1, 1, 1, 0, 0]
-const onOffColors = ["tomato", "green"]
-
-function checkEndConditionOfLightSwitches() {
-  const isAllOn = lightSwitchStates.every((num) => num % 2)
-  const isAllOff = lightSwitchStates.every((num) => num % 2 === 0)
-  if (isAllOn) {
-    console.log("great all is on")
-  } else if (isAllOff) {
-    console.log("great all is off")
-  } else {
-    console.log("keep playing")
-  }
-}
 
 // functions
-function addEventListeners() {
+function setLightSwitchPuzzle() {
+  const vectors = [
+    [1, 1, 0, 1, 0, 0],
+    [1, 1, 1, 0, 1, 0],
+    [0, 1, 1, 0, 0, 1],
+    [1, 0, 0, 1, 1, 0],
+    [0, 1, 0, 1, 1, 1],
+    [0, 0, 1, 0, 1, 1],
+  ]
   // every lightswitch button
-  const litbtn1 = document
-    .getElementById("litbtn1")
-    .addEventListener("click", someFunction1)
-  const litbtn2 = document
-    .getElementById("litbtn2")
-    .addEventListener("click", someFunction2)
-  const litbtn3 = document
-    .getElementById("litbtn3")
-    .addEventListener("click", someFunction3)
-  const litbtn4 = document
-    .getElementById("litbtn4")
-    .addEventListener("click", someFunction4)
-  const litbtn5 = document
-    .getElementById("litbtn5")
-    .addEventListener("click", someFunction5)
-  const litbtn6 = document
-    .getElementById("litbtn6")
-    .addEventListener("click", someFunction6)
+  const litbtns = document.querySelectorAll("button[id^=litbtn]")
+  litbtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      // const btnId = e.target.id
+      const btnIndex = e.target.dataset.btnNmb - 1
+      lightSwitchStates = addvector(lightSwitchStates, vectors[btnIndex])
+      setColor()
+      checkEndCondition()
+    })
+  })
+  // replace current state with mapped state by adding 1
+  function addvector(a, b) {
+    return a.map((e, i) => e + b[i])
+  }
+
+  function checkEndCondition() {
+    const isAllOn = lightSwitchStates.every((num) => num % 2)
+    const isAllOff = lightSwitchStates.every((num) => num % 2 === 0)
+    if (isAllOn) {
+      console.log("great all is on")
+    } else if (isAllOff) {
+      console.log("great all is off")
+    } else {
+      console.log("keep playing")
+    }
+  }
 }
 
 // setup puzzle functionality
 
-// lightswitch functionality
-
-function addvector(a, b) {
-  return a.map((e, i) => e + b[i])
-}
-
-function someFunction1() {
-  lightSwitchStates = addvector(lightSwitchStates, [1, 1, 0, 1, 0, 0])
-  setColor()
-  checkEndConditionOfLightSwitches()
-}
-function someFunction2() {
-  lightSwitchStates = addvector(lightSwitchStates, [1, 1, 1, 0, 1, 0])
-  setColor()
-  checkEndConditionOfLightSwitches()
-}
-function someFunction3() {
-  lightSwitchStates = addvector(lightSwitchStates, [0, 1, 1, 0, 0, 1])
-  setColor()
-  checkEndConditionOfLightSwitches()
-}
-function someFunction4() {
-  lightSwitchStates = addvector(lightSwitchStates, [1, 0, 0, 1, 1, 0])
-  setColor()
-  checkEndConditionOfLightSwitches()
-}
-function someFunction5() {
-  lightSwitchStates = addvector(lightSwitchStates, [0, 1, 0, 1, 1, 1])
-  setColor()
-  checkEndConditionOfLightSwitches()
-}
-function someFunction6() {
-  lightSwitchStates = addvector(lightSwitchStates, [0, 0, 1, 0, 1, 1])
-  setColor()
-  checkEndConditionOfLightSwitches()
-}
-
 function setColor() {
+  const onOffColors = ["tomato", "green"]
+
   litbtn1.style.backgroundColor = onOffColors[lightSwitchStates[0] % 2]
   litbtn2.style.backgroundColor = onOffColors[lightSwitchStates[1] % 2]
   litbtn3.style.backgroundColor = onOffColors[lightSwitchStates[2] % 2]
