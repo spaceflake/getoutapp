@@ -1,7 +1,7 @@
 window.onload = initApp
 
 function initApp() {
-  setScene(SCENES[7])
+  setScene(SCENES[0])
   setColor()
   setLightSwitchPuzzle()
   const form = document.querySelector("#input-form")
@@ -19,12 +19,14 @@ const SCENES = [
     img: "pathToImg - ?",
     sceneSetting:
       "So here you are again sitting in an office, waiting to be called in for a job interview. Let´s hope all goes well this time. After sitting here for some time now the secretary finally shows signs of life and lets you know that Mr.Black will see you now.",
+    hasPuzzle: false,
     goTos: [
       {
         btnTxt: "Enter the office",
         btnFunction: function () {
           setScene(SCENES[1])
         },
+        nextScene: 1,
       },
     ],
     nextRoom: 1,
@@ -34,12 +36,14 @@ const SCENES = [
     img: "pathToImg - ?",
     sceneSetting:
       "As you enter the office, you notice the black marble floors and walls. While beautiful and elegant it seems to absorb the light entering the room, leaving it dark and mysterious. Mr.Black acknowledged you and ask you to take a seat.",
+    hasPuzzle: false,
     goTos: [
       {
         btnTxt: "Sit down",
         btnFunction: function () {
           setScene(SCENES[2])
         },
+        nextScene: 2,
       },
     ],
     nextRoom: 2,
@@ -48,6 +52,7 @@ const SCENES = [
     title: "the interview",
     img: "images/mrblack.jpg",
     sceneSetting: `Mr.Black finishing up whatever he was doing at the computer. Looks at you for a moment and asks - Who are you?`,
+    hasPuzzle: false,
     goTos: [
       {
         btnTxt: "Enter your name",
@@ -64,6 +69,7 @@ const SCENES = [
           ).textContent = "")
           setScene(SCENES[3])
         },
+        nextScene: 3,
       },
     ],
     nextRoom: 3,
@@ -73,12 +79,14 @@ const SCENES = [
     img: "pathToImg-mansion",
     sceneSetting:
       "You arrive a bit early to the adress from the note. What you face is magnificent. You approach with awe and as you get closer you can see the front door is wide open. That is a bit strange, but you are at the right adress and at the right time.",
+    hasPuzzle: false,
     goTos: [
       {
         btnTxt: "Enter the Villa",
         btnFunction: function () {
           setScene(SCENES[4])
         },
+        nextScene: 4,
       },
     ],
     nextRoom: 4,
@@ -87,12 +95,14 @@ const SCENES = [
     title: "Hallway",
     img: "pathToImg-hallway",
     sceneSetting: `You enter the hallway. It's very elegant. There are a few doors on the sides with numbers on them you also see a little table in the middle with a folded letter on it. As you get closer, you can see ${userName} written on it. You unfold it and it reads: Welcome to your interview ${userName}, proceed to door 1.`,
+    hasPuzzle: false,
     goTos: [
       {
         btnTxt: "Enter door 1",
         btnFunction: function () {
           setScene(SCENES[5])
         },
+        nextScene: 5,
       },
     ],
     nextRoom: 5,
@@ -102,6 +112,7 @@ const SCENES = [
     img: "pathToImg-theOffice",
     sceneSetting:
       "This looks like an office. There is desk with a computer on it. ",
+    hasPuzzle: true,
     goTos: [
       {
         btnTxt: "Go to the computer",
@@ -111,6 +122,7 @@ const SCENES = [
           setLogicPuzzle()
           hideElement(nextRoomBtn)
         },
+        nextScene: 6,
       },
     ],
     nextRoom: 6,
@@ -126,6 +138,7 @@ const SCENES = [
           hideElement(logicPuzzle)
           setScene(SCENES[7])
         },
+        nextScene: 7,
       },
     ],
     nextRoom: 7,
@@ -148,6 +161,7 @@ const SCENES = [
           setScene(SCENES[8])
           hideElement(litBtnsPuzzle)
         },
+        nextScene: 8,
       },
     ],
     nextRoom: 8,
@@ -162,6 +176,7 @@ const SCENES = [
         btnFunction: function () {
           setScene(SCENES[0])
         },
+        nextScene: 0,
       },
     ],
     nextRoom: 8,
@@ -170,21 +185,46 @@ const SCENES = [
 
 const roomTitleEl = document.getElementById("room-title")
 const sceneSettingEl = document.getElementById("room-setting")
+const btnContainer = document.getElementById("btn-container")
 const nextRoomBtn = document.getElementById("nextRoom-btn")
 const formEl = document.getElementById("input-form")
 const litBtnsPuzzle = document.getElementById("litBtnsWrapper")
 const logicPuzzle = document.getElementById("logic-puzzle")
 
-function setScene(SCENES, i = 0) {
-  roomTitleEl.innerText = SCENES.title
-  sceneSettingEl.innerText = SCENES.sceneSetting
+function setScene(SCENE) {
+  roomTitleEl.innerText = SCENE.title
+  sceneSettingEl.innerText = SCENE.sceneSetting
+  const btnIndex = 0
+  if (SCENE.hasPuzzle) {
+    console.log("Scene has puzzle")
+    showElement(logicPuzzle)
+    setLogicPuzzle()
+    hideElement(btnContainer)
+  } else {
+    for (const goto of SCENE.goTos) {
+      // const newBtn = document.createElement("button")
+      // newBtn.className = "btn btn-outline my-6"
+      nextRoomBtn.onclick = function () {
+        const nextSceneIndex = goto.nextScene
+        setScene(SCENES[nextSceneIndex])
+      }
+      nextRoomBtn.innerText = SCENE.goTos[btnIndex].btnTxt
+      // btnContainer.appendChild(newBtn)
+    }
+  }
+}
 
-  nextRoomBtn.onclick = SCENES.goTos[i].btnFunction
-
-  nextRoomBtn.innerText = SCENES.goTos[i].btnTxt
+function createBtn() {
+  const newBtn = document.createElement("button")
+  newBtn.className = "btn btn-outline my-6"
+  btnContainer.appendChild(newBtn)
 }
 
 // UTILITY FUNCTIONS
+/**
+ * Takes an element and removes class hidden
+ * @param {HTMLElement} element
+ */
 function showElement(element) {
   element.classList.remove("hidden")
 }
@@ -243,7 +283,7 @@ function setLogicPuzzle() {
     if (text === PUZZLES[0].answer) {
       puzzleAnswer.textContent = text + " is correct"
       PUZZLES[0].isAnswerCorrect = true
-      showElement(nextRoomBtn)
+      showElement(btnContainer)
     } else {
       puzzleAnswer.textContent = text + " is not the right answer. Try again!"
       tries++
