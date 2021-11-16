@@ -23,7 +23,7 @@ function buildScenes() {
           nextScene: 1,
         },
       ],
-      nextRoom: 1,
+      currentSceneIndex: 0,
     },
     {
       title: "the interview",
@@ -34,13 +34,10 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "Sit down",
-          btnFunction: function () {
-            setScene(SCENES[2])
-          },
           nextScene: 2,
         },
       ],
-      nextRoom: 2,
+      currentSceneIndex: 1,
     },
     {
       title: "the interview",
@@ -50,23 +47,14 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "Enter your name",
-          btnFunction: function () {
-            showElement(formEl)
-            hideElement(nextRoomBtn)
-          },
+          nextScene: 3,
         },
         {
           btnTxt: "Leave the office",
-          btnFunction: function () {
-            const clearDialog = (document.querySelector(
-              "#dialog-el"
-            ).textContent = "")
-            setScene(SCENES[3])
-          },
-          nextScene: 3,
+          nextScene: 10,
         },
       ],
-      nextRoom: 3,
+      currentSceneIndex: 2,
     },
     {
       title: "Villa Enigma",
@@ -77,13 +65,10 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "Enter the Villa",
-          btnFunction: function () {
-            setScene(SCENES[4])
-          },
           nextScene: 4,
         },
       ],
-      nextRoom: 4,
+      currentSceneIndex: 3,
     },
     {
       title: "Hallway",
@@ -93,13 +78,23 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "Enter door 1",
-          btnFunction: function () {
-            setScene(SCENES[5])
-          },
+          nextScene: 6,
+        },
+      ],
+      currentSceneIndex: 4,
+    },
+    {
+      title: "Hallway",
+      img: "pathToImg-hallway",
+      sceneSetting: "Ok. Back at the hallway. Which door should we try now?",
+      hasPuzzle: false,
+      goTos: [
+        {
+          btnTxt: "Enter door 1",
           nextScene: 5,
         },
       ],
-      nextRoom: 5,
+      currentSceneIndex: 5,
     },
     {
       title: "The Office",
@@ -110,32 +105,27 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "Go to the computer",
-          btnFunction: function () {
-            setScene(SCENES[6])
-            showElement(logicPuzzle)
-            setLogicPuzzle()
-            hideElement(nextRoomBtn)
-          },
           nextScene: 6,
         },
       ],
-      nextRoom: 6,
+      currentSceneIndex: 6,
     },
     {
       title: "The Office",
       img: "pathToImg-theOffice",
-      sceneSetting: "the computer - puzzle",
+      sceneSetting:
+        "Suddenly a secret door opens behind the desk. It looks very dark inside. Should you go through or is it better to go back to the hallway?",
       goTos: [
         {
           btnTxt: "Go through mysterious door",
-          btnFunction: function () {
-            hideElement(logicPuzzle)
-            setScene(SCENES[7])
-          },
-          nextScene: 7,
+          nextScene: 8,
+        },
+        {
+          btnTxt: "Go back to the hallway",
+          nextScene: 5,
         },
       ],
-      nextRoom: 7,
+      currentSceneIndex: 7,
     },
     {
       title: "The Library",
@@ -144,21 +134,14 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "go to device",
-          btnFunction: function () {
-            showElement(litBtnsPuzzle)
-            hideElement(nextRoomBtn)
-          },
+          nextScene: 8,
         },
         {
           btnTxt: "next",
-          btnFunction: function () {
-            setScene(SCENES[8])
-            hideElement(litBtnsPuzzle)
-          },
           nextScene: 8,
         },
       ],
-      nextRoom: 8,
+      currentSceneIndex: 8,
     },
     {
       title: "The End",
@@ -167,13 +150,22 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "Play Again?",
-          btnFunction: function () {
-            setScene(SCENES[0])
-          },
           nextScene: 0,
         },
       ],
-      nextRoom: 8,
+      currentSceneIndex: 9,
+    },
+    {
+      title: "Back Home",
+      sceneSetting:
+        "Whats a job anyway. You might win the lottery. Or just maybe you should try that interview again?",
+      goTos: [
+        {
+          btnTxt: "Go back to the Interview",
+          nextScene: 0,
+        },
+      ],
+      currentSceneIndex: 10,
     },
   ]
 }

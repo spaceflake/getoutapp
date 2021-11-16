@@ -35,14 +35,15 @@ function setLogicPuzzle() {
     const puzzleAnswer = document.querySelector("#puzzle-answer")
     let puzzleInput = document.querySelector("#puzzle-input")
     text = puzzleInput.value.toUpperCase()
-    let tries = 0
     if (text === PUZZLES[0].answer) {
       puzzleAnswer.textContent = text + " is correct"
       PUZZLES[0].isAnswerCorrect = true
       showElement(btnContainer)
+      buildScenes()
+      setScene(SCENES[7])
+      hideElement(logicPuzzle)
     } else {
       puzzleAnswer.textContent = text + " is not the right answer. Try again!"
-      tries++
     }
   }
 }

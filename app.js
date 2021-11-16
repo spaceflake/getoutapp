@@ -30,7 +30,10 @@ function loadElements() {
   litBtnsPuzzle = document.getElementById("litBtnsWrapper")
   logicPuzzle = document.getElementById("logic-puzzle")
 }
-
+/**
+ * Takes the SCENES and sets text and makes buttons
+ * @param {} SCENE
+ */
 function setScene(SCENE) {
   roomTitleEl.innerText = SCENE.title
   sceneSettingEl.innerText = SCENE.sceneSetting
