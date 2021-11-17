@@ -1,8 +1,8 @@
-/** @typedef {{ title: String, img: String, sceneSetting: String, hasPuzzle: Boolean, goTos: Goto[]}} Scene */
+/** @typedef {{ title: String, img: String, sceneSetting: String, hasPuzzle: Boolean, goTos: Goto[], currentSceneIndex: Number}} Scene */
 /** @typedef {{ btnText: String, nextScene: Number }} Goto */
 
 // state
-/** Holds the player name. Updated in later scene with form */
+/** @type {String} Holds the player name. Updated in later scene with form */
 let userName = ""
 
 /** @type {Scene[]} */
@@ -73,12 +73,20 @@ function buildScenes() {
     {
       title: "Hallway",
       img: "pathToImg-hallway",
-      sceneSetting: `You enter the hallway. It's very elegant. There are a few doors on the sides with numbers on them you also see a little table in the middle with a folded letter on it. As you get closer, you can see ${userName} written on it. You unfold it and it reads: Welcome to your interview ${userName}, proceed to door 1.`,
+      sceneSetting: `You enter the hallway. It's very elegant. There are a few doors on the sides with numbers on them you also see a little table in the middle with a folded letter on it. As you get closer, you can see ${userName} written on it. You unfold it and it reads: Welcome to your interview ${userName}, proceed to door....... Which door then??`,
       hasPuzzle: false,
       goTos: [
         {
           btnTxt: "Enter door 1",
           nextScene: 6,
+        },
+        {
+          btnTxt: "Enter door 2",
+          nextScene: 11,
+        },
+        {
+          btnTxt: "Enter door 3",
+          nextScene: 11,
         },
       ],
       currentSceneIndex: 4,
@@ -90,8 +98,16 @@ function buildScenes() {
       hasPuzzle: false,
       goTos: [
         {
-          btnTxt: "Enter door 1",
-          nextScene: 5,
+          btnTxt: "The Office",
+          nextScene: 6,
+        },
+        {
+          btnTxt: "Enter door 2",
+          nextScene: 11,
+        },
+        {
+          btnTxt: "Enter door 3",
+          nextScene: 11,
         },
       ],
       currentSceneIndex: 5,
@@ -100,12 +116,12 @@ function buildScenes() {
       title: "The Office",
       img: "pathToImg-theOffice",
       sceneSetting:
-        "This looks like an office. There is desk with a computer on it. ",
+        "The door closes behind you. This looks to be an office. There is desk with a computer on it. You need to solve the puzzle.",
       hasPuzzle: true,
       goTos: [
         {
-          btnTxt: "Go to the computer",
-          nextScene: 6,
+          btnTxt: "Back to Hallway",
+          nextScene: 5,
         },
       ],
       currentSceneIndex: 6,
@@ -115,6 +131,7 @@ function buildScenes() {
       img: "pathToImg-theOffice",
       sceneSetting:
         "Suddenly a secret door opens behind the desk. It looks very dark inside. Should you go through or is it better to go back to the hallway?",
+      hasPuzzle: false,
       goTos: [
         {
           btnTxt: "Go through mysterious door",
@@ -131,6 +148,7 @@ function buildScenes() {
       title: "The Library",
       sceneSetting:
         "Another dark room. There is a small table in the middle of the room with a device on it. It seems there is 6 buttons on it. Some are lit",
+      hasPuzzle: true,
       goTos: [
         {
           btnTxt: "go to device",
@@ -138,7 +156,7 @@ function buildScenes() {
         },
         {
           btnTxt: "next",
-          nextScene: 8,
+          nextScene: 9,
         },
       ],
       currentSceneIndex: 8,
@@ -147,6 +165,7 @@ function buildScenes() {
       title: "The End",
       sceneSetting:
         "You made it through. Well done! I guess you got the job then.",
+      hasPuzzle: false,
       goTos: [
         {
           btnTxt: "Play Again?",
@@ -159,6 +178,7 @@ function buildScenes() {
       title: "Back Home",
       sceneSetting:
         "Whats a job anyway. You might win the lottery. Or just maybe you should try that interview again?",
+      hasPuzzle: false,
       goTos: [
         {
           btnTxt: "Go back to the Interview",
@@ -166,6 +186,18 @@ function buildScenes() {
         },
       ],
       currentSceneIndex: 10,
+    },
+    {
+      title: "Door locked",
+      sceneSetting: "",
+      hasPuzzle: false,
+      goTos: [
+        {
+          btnTxt: "hmm",
+          nextScene: 4,
+        },
+      ],
+      currentSceneIndex: 11,
     },
   ]
 }
