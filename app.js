@@ -1,19 +1,14 @@
-/** @type {HTMLElement} */ let roomTitleEl
-/** @type {HTMLElement} */ let sceneSettingEl
-/** @type {HTMLElement} */ let btnContainer
-/** @type {HTMLElement} */ let nextRoomBtn
 /** @type {HTMLElement} */ let formEl
 /** @type {HTMLElement} */ let litBtnsPuzzle
 /** @type {HTMLElement} */ let logicPuzzle
 
 window.onload = initApp
 
+/**Starts the app */
 function initApp() {
   loadElements()
   buildScenes()
   setScene(SCENES[0])
-  // setColor()
-  // setLightSwitchPuzzle()
   const form = document.querySelector("#input-form")
   form.addEventListener("submit", (event) => {
     event.preventDefault()
@@ -22,10 +17,6 @@ function initApp() {
 }
 
 function loadElements() {
-  roomTitleEl = document.getElementById("room-title")
-  sceneSettingEl = document.getElementById("room-setting")
-  btnContainer = document.getElementById("btn-container")
-  nextRoomBtn = document.getElementById("nextRoom-btn")
   formEl = document.getElementById("input-form")
   litBtnsPuzzle = document.getElementById("litBtnsWrapper")
   logicPuzzle = document.getElementById("logic-puzzle")
@@ -35,17 +26,32 @@ function loadElements() {
  * @param {} SCENE
  */
 function setScene(SCENE) {
+  // get elements
+  const roomTitleEl = document.getElementById("room-title")
+  const sceneSettingEl = document.getElementById("room-setting")
+  const btnContainer = document.getElementById("btn-container")
+  // set text on elements
   roomTitleEl.innerText = SCENE.title
   sceneSettingEl.innerText = SCENE.sceneSetting
+  // hide extra elements by default
+  hideElement(logicPuzzle)
+  hideElement(litBtnsPuzzle)
+
+  // check if scene has puzzle
   if (SCENE.hasPuzzle) {
-    console.log("Scene has puzzle")
-    setLogicPuzzle()
-    hideElement(btnContainer)
+    // setLightSwitchPuzzle()
+    setLogicPuzzle(2)
+    createBtn()
   } else {
+    createBtn()
+    // hideElement(logicPuzzle)
+  }
+  /**Cycles through scene gotos, creates buttons and adds clickevent */
+  function createBtn() {
     btnContainer.innerHTML = ""
     for (const goto of SCENE.goTos) {
       const newBtn = document.createElement("button")
-      newBtn.className = "btn btn-outline my-6"
+      newBtn.className = "btn btn-outline mb-6"
       newBtn.onclick = function () {
         const nextSceneIndex = goto.nextScene
         setScene(SCENES[nextSceneIndex])
@@ -54,12 +60,6 @@ function setScene(SCENE) {
       btnContainer.appendChild(newBtn)
     }
   }
-}
-/**not used for now */
-function createBtn() {
-  const newBtn = document.createElement("button")
-  newBtn.className = "btn btn-outline my-6"
-  btnContainer.appendChild(newBtn)
 }
 
 // UTILITY FUNCTIONS
@@ -82,6 +82,5 @@ function handleInput(event) {
   userName = inputValue
   buildScenes()
   hideElement(formEl)
-  showElement(nextRoomBtn)
-  setScene(SCENES[2], (i = 1))
+  setScene(SCENES[2])
 }
