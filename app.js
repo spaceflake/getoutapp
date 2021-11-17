@@ -58,7 +58,7 @@ function setScene(SCENE) {
         } else {
           hideElement(dialogEl)
           hideElement(formEl)
-          setScene(SCENE[nextSceneIndex])
+          setScene(SCENES[nextSceneIndex])
         }
       }
       newBtn.innerText = goto.btnTxt
