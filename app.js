@@ -37,7 +37,7 @@ function setScene(SCENE) {
   sceneSettingEl.innerText = SCENE.sceneSetting
   // hide puzzle elements by default
   hideElement(logicPuzzle)
-  hideElement(litBtnsPuzzle)
+  // hideElement(litBtnsPuzzle)
 
   // check if scene has puzzle
   if (SCENE.hasPuzzle) {
@@ -61,7 +61,7 @@ function setScene(SCENE) {
         } else {
           hideElement(dialogEl)
           hideElement(formEl)
-          setScene(SCENES[nextSceneIndex])
+          setScene(SCENE[nextSceneIndex])
         }
       }
       newBtn.innerText = goto.btnTxt
