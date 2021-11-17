@@ -39,7 +39,7 @@ function setLogicPuzzle(i) {
     if (text === PUZZLES[i].answer) {
       puzzleAnswer.textContent = text + " is correct"
       PUZZLES[i].isAnswerCorrect = true
-      setScene(SCENES[7])
+      setScene(SCENES[8])
       hideElement(logicPuzzle)
     } else {
       puzzleAnswer.textContent = text + " is not the right answer. Try again!"
