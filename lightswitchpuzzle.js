@@ -1,10 +1,12 @@
 // lightswitch functionality
 
 // starting order for the lightswitch puzzle. Where 1 is on(green) and 0 is off(red)
-let lightSwitchStates = [0, 1, 1, 1, 0, 0]
 
 // functions
 function setLightSwitchPuzzle() {
+  showElement(litBtnsPuzzle)
+  let lightSwitchStates = [0, 1, 1, 1, 0, 0]
+  setColor()
   const vectors = [
     [1, 1, 0, 1, 0, 0],
     [1, 1, 1, 0, 1, 0],
@@ -15,13 +17,15 @@ function setLightSwitchPuzzle() {
   ]
   // every lightswitch button
   const litbtns = document.querySelectorAll("button[id^=litbtn]")
+
   litbtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      // const btnId = e.target.id
+      const btnId = e.target.id
       const btnIndex = e.target.dataset.btnNmb - 1
       lightSwitchStates = addvector(lightSwitchStates, vectors[btnIndex])
-      setColor()
+      setColor(btnId)
       checkEndCondition()
+      console.log(btnId)
     })
   })
   // replace current state with mapped state by adding 1
@@ -36,7 +40,7 @@ function setLightSwitchPuzzle() {
     if (isAllOn) {
       alert("great all is on")
       showElement(nextRoomBtn)
-      setScene(SCENES[7], (i = 1))
+      setScene(SCENES[9])
     } else if (isAllOff) {
       alert("great all is off")
     } else {
@@ -44,8 +48,6 @@ function setLightSwitchPuzzle() {
     }
   }
 }
-
-// setup puzzle functionality
 
 function setColor() {
   const onOffColors = ["tomato", "green"]
