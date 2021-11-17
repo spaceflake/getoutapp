@@ -1,5 +1,3 @@
-window.onload = initApp
-
 /** @type {HTMLElement} */ let formEl
 // /** @type {HTMLElement} */ let litBtnsPuzzle
 /** @type {HTMLElement} */ let logicPuzzle
@@ -16,6 +14,8 @@ function initApp() {
     handleInput(event)
   })
 }
+
+window.onload = initApp
 
 function loadElements() {
   formEl = document.getElementById("input-form")
