@@ -1,9 +1,9 @@
+window.onload = initApp
+
 /** @type {HTMLElement} */ let formEl
 // /** @type {HTMLElement} */ let litBtnsPuzzle
 /** @type {HTMLElement} */ let logicPuzzle
 /** @type {HTMLElement} */ let dialogEl
-
-window.onload = initApp
 
 /**Starts the app */
 function initApp() {
