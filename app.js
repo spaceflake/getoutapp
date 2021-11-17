@@ -1,6 +1,7 @@
 /** @type {HTMLElement} */ let formEl
 /** @type {HTMLElement} */ let litBtnsPuzzle
 /** @type {HTMLElement} */ let logicPuzzle
+/** @type {HTMLElement} */ let dialogEl
 
 window.onload = initApp
 
@@ -20,6 +21,7 @@ function loadElements() {
   formEl = document.getElementById("input-form")
   litBtnsPuzzle = document.getElementById("litBtnsWrapper")
   logicPuzzle = document.getElementById("logic-puzzle")
+  dialogEl = document.querySelector("#dialog-el")
 }
 /**
  * Takes the SCENES and sets text and makes buttons
@@ -33,14 +35,13 @@ function setScene(SCENE) {
   // set text on elements
   roomTitleEl.innerText = SCENE.title
   sceneSettingEl.innerText = SCENE.sceneSetting
-  // hide extra elements by default
+  // hide puzzle elements by default
   hideElement(logicPuzzle)
   hideElement(litBtnsPuzzle)
 
   // check if scene has puzzle
   if (SCENE.hasPuzzle) {
-    // setLightSwitchPuzzle()
-    setLogicPuzzle(2)
+    setLogicPuzzle(getRandomIndexNumber())
     createBtn()
   } else {
     createBtn()
@@ -50,11 +51,19 @@ function setScene(SCENE) {
   function createBtn() {
     btnContainer.innerHTML = ""
     for (const goto of SCENE.goTos) {
+      const nextSceneIndex = goto.nextScene
       const newBtn = document.createElement("button")
       newBtn.className = "btn btn-outline mb-6"
       newBtn.onclick = function () {
-        const nextSceneIndex = goto.nextScene
-        setScene(SCENES[nextSceneIndex])
+        if (goto.btnTxt === "Enter your name") {
+          console.log("nameinput here")
+          showElement(formEl)
+          showElement(dialogEl)
+        } else {
+          hideElement(dialogEl)
+          hideElement(formEl)
+          setScene(SCENES[nextSceneIndex])
+        }
       }
       newBtn.innerText = goto.btnTxt
       btnContainer.appendChild(newBtn)
@@ -70,17 +79,29 @@ function setScene(SCENE) {
 function showElement(element) {
   element.classList.remove("hidden")
 }
+/**
+ *
+ * @param {HTMLElement} element
+ */
 function hideElement(element) {
   element.classList.add("hidden")
 }
 
+function getRandomIndexNumber() {
+  const indexNumber = Math.floor(Math.random() * 3) + 1
+  return indexNumber
+}
+/**
+ *Takes the value from input, displays dialog, hides the form element and sets the next scene.
+ * @param {String} event
+ */
 function handleInput(event) {
   const inputValue = event.target.querySelector("input").value
-  const dialog = document.querySelector("#dialog-el")
-  dialog.innerHTML = `Im <span class='text-blue-400'>${inputValue}</span>. I am here for the interview.
+
+  dialogEl.innerHTML = `Im <span class='text-blue-400'>${inputValue}</span>. I am here for the interview.
   <br> <p class='text-gray-400'>Mr.Black replies</p> - "Haha, an interview now. I don't have time for that." <br> <p class='text-gray-400'>He looks for a piece of paper and writes something down and hands it to you.<br> He says afterwards</p><br> - "Go to that adress at that time. We'll see about that interview then. Now leave please."`
   userName = inputValue
   buildScenes()
   hideElement(formEl)
-  setScene(SCENES[2])
+  setScene(SCENES[3])
 }
