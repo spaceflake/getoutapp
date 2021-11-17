@@ -143,7 +143,7 @@ function buildScenes() {
       title: "The Office",
       img: "pathToImg-theOffice",
       sceneSetting:
-        "Suddenly a secret door opens behind the desk. It looks very dark inside. Should you go through or is it better to go back to the hallway?",
+        "Suddenly a secret door opens behind the desk. It looks very dark inside. Alright let's see whats on the other side.",
       hasPuzzle: false,
       goTos: [
         {
