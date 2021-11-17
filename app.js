@@ -23,10 +23,7 @@ function loadElements() {
   logicPuzzle = document.getElementById("logic-puzzle")
   dialogEl = document.querySelector("#dialog-el")
 }
-/**
- * Takes the SCENES and sets text and makes buttons
- * @param {} SCENE
- */
+
 function setScene(SCENE) {
   // get elements
   const roomTitleEl = document.getElementById("room-title")
@@ -46,7 +43,7 @@ function setScene(SCENE) {
   } else {
     createBtn()
   }
-  /**Cycles through scene gotos, creates buttons and adds clickevent */
+  /*Cycles through scene gotos, creates buttons and adds clickevent */
   function createBtn() {
     btnContainer.innerHTML = ""
     for (const goto of SCENE.goTos) {
