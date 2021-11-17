@@ -1,5 +1,5 @@
 /** @type {HTMLElement} */ let formEl
-/** @type {HTMLElement} */ let litBtnsPuzzle
+// /** @type {HTMLElement} */ let litBtnsPuzzle
 /** @type {HTMLElement} */ let logicPuzzle
 /** @type {HTMLElement} */ let dialogEl
 
@@ -19,7 +19,7 @@ function initApp() {
 
 function loadElements() {
   formEl = document.getElementById("input-form")
-  litBtnsPuzzle = document.getElementById("litBtnsWrapper")
+  // litBtnsPuzzle = document.getElementById("litBtnsWrapper")
   logicPuzzle = document.getElementById("logic-puzzle")
   dialogEl = document.querySelector("#dialog-el")
 }
@@ -45,7 +45,6 @@ function setScene(SCENE) {
     createBtn()
   } else {
     createBtn()
-    // hideElement(logicPuzzle)
   }
   /**Cycles through scene gotos, creates buttons and adds clickevent */
   function createBtn() {
@@ -86,14 +85,14 @@ function showElement(element) {
 function hideElement(element) {
   element.classList.add("hidden")
 }
-
+/** returns a random number between 1 and 3 */
 function getRandomIndexNumber() {
   const indexNumber = Math.floor(Math.random() * 3) + 1
   return indexNumber
 }
 /**
  *Takes the value from input, displays dialog, hides the form element and sets the next scene.
- * @param {String} event
+ * @param {} event
  */
 function handleInput(event) {
   const inputValue = event.target.querySelector("input").value
