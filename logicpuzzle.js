@@ -1,12 +1,13 @@
 // THE LOGIC PUZZLE
-function setLogicPuzzle() {
-  showElement(logicPuzzle)
+function setLogicPuzzle(i) {
   // get elements - text, input, button
   const puzzleText = document.querySelector("#puzzle-text")
-
   const puzzleBtn = document
     .querySelector("#puzzle-btn")
     .addEventListener("click", checkInput)
+
+  showElement(logicPuzzle)
+
   // puzzles
   const PUZZLES = [
     {
@@ -17,7 +18,7 @@ function setLogicPuzzle() {
     },
     {
       text: "The day before two days after the day before tomorrow is Saturday. What day is it today?",
-      answer: "friday",
+      answer: "FRIDAY",
       isTried: false,
       isAnswerCorrect: false,
     },
@@ -28,18 +29,16 @@ function setLogicPuzzle() {
       isAnswerCorrect: false,
     },
   ]
-  puzzleText.textContent = PUZZLES[0].text
+  puzzleText.textContent = PUZZLES[i].text
 
   function checkInput() {
     let text
     const puzzleAnswer = document.querySelector("#puzzle-answer")
     let puzzleInput = document.querySelector("#puzzle-input")
     text = puzzleInput.value.toUpperCase()
-    if (text === PUZZLES[0].answer) {
+    if (text === PUZZLES[i].answer) {
       puzzleAnswer.textContent = text + " is correct"
-      PUZZLES[0].isAnswerCorrect = true
-      showElement(btnContainer)
-      buildScenes()
+      PUZZLES[i].isAnswerCorrect = true
       setScene(SCENES[7])
       hideElement(logicPuzzle)
     } else {
