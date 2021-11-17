@@ -51,24 +51,37 @@ function buildScenes() {
         },
         {
           btnTxt: "Leave the office",
-          nextScene: 10,
+          nextScene: 11,
         },
       ],
       currentSceneIndex: 2,
     },
     {
-      title: "Villa Enigma",
-      img: "pathToImg-mansion",
-      sceneSetting:
-        "You arrive a bit early to the adress from the note. What you face is magnificent. You approach with awe and as you get closer you can see the front door is wide open. That is a bit strange, but you are at the right adress and at the right time.",
+      title: "the interview",
+      img: "images/mrblack.jpg",
+      sceneSetting: `Mr.Black finishing up whatever he was doing at the computer. Looks at you for a moment and asks - Who are you?`,
       hasPuzzle: false,
       goTos: [
         {
-          btnTxt: "Enter the Villa",
+          btnTxt: "Take note and leave",
           nextScene: 4,
         },
       ],
       currentSceneIndex: 3,
+    },
+    {
+      title: "Villa Enigma",
+      img: "pathToImg-mansion",
+      sceneSetting:
+        "You arrive a bit early to the adress from the note. What you face is magnificent. It's a great mansion. You approach with awe and as you get closer you can see the front door is wide open. That is a bit strange, but you are at the right adress and at the right time.",
+      hasPuzzle: false,
+      goTos: [
+        {
+          btnTxt: "Enter the Villa",
+          nextScene: 5,
+        },
+      ],
+      currentSceneIndex: 4,
     },
     {
       title: "Hallway",
@@ -78,18 +91,18 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "Enter door 1",
-          nextScene: 6,
+          nextScene: 7,
         },
         {
           btnTxt: "Enter door 2",
-          nextScene: 11,
+          nextScene: 12,
         },
         {
           btnTxt: "Enter door 3",
-          nextScene: 11,
+          nextScene: 12,
         },
       ],
-      currentSceneIndex: 4,
+      currentSceneIndex: 5,
     },
     {
       title: "Hallway",
@@ -99,18 +112,18 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "The Office",
-          nextScene: 6,
+          nextScene: 7,
         },
         {
           btnTxt: "Enter door 2",
-          nextScene: 11,
+          nextScene: 12,
         },
         {
           btnTxt: "Enter door 3",
-          nextScene: 11,
+          nextScene: 12,
         },
       ],
-      currentSceneIndex: 5,
+      currentSceneIndex: 6,
     },
     {
       title: "The Office",
@@ -121,10 +134,10 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "Back to Hallway",
-          nextScene: 5,
+          nextScene: 6,
         },
       ],
-      currentSceneIndex: 6,
+      currentSceneIndex: 7,
     },
     {
       title: "The Office",
@@ -135,14 +148,10 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "Go through mysterious door",
-          nextScene: 8,
-        },
-        {
-          btnTxt: "Go back to the hallway",
-          nextScene: 5,
+          nextScene: 10,
         },
       ],
-      currentSceneIndex: 7,
+      currentSceneIndex: 8,
     },
     {
       title: "The Library",
@@ -159,20 +168,15 @@ function buildScenes() {
           nextScene: 9,
         },
       ],
-      currentSceneIndex: 8,
+      currentSceneIndex: 9,
     },
     {
       title: "The End",
       sceneSetting:
-        "You made it through. Well done! I guess you got the job then.",
+        "Going through the door seem to have teleported me back to Mr.Blacks office. He says - Well done! You got out of Villa Enigma. That was the interview test. You're hired!",
       hasPuzzle: false,
-      goTos: [
-        {
-          btnTxt: "Play Again?",
-          nextScene: 0,
-        },
-      ],
-      currentSceneIndex: 9,
+      goTos: [],
+      currentSceneIndex: 10,
     },
     {
       title: "Back Home",
@@ -185,7 +189,7 @@ function buildScenes() {
           nextScene: 0,
         },
       ],
-      currentSceneIndex: 10,
+      currentSceneIndex: 11,
     },
     {
       title: "Door locked",
@@ -194,10 +198,10 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "hmm",
-          nextScene: 4,
+          nextScene: 5,
         },
       ],
-      currentSceneIndex: 11,
+      currentSceneIndex: 12,
     },
   ]
 }
