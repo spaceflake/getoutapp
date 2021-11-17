@@ -13,8 +13,8 @@
   <script src="./logicpuzzle.js"></script>
 </head>
 <body class="h-screen">
-  <div class="h-full">
-    <div class="container mx-auto flex flex-col  max-w-2xl p-12">
+  
+    <div class="container mx-auto flex flex-col  max-w-2xl p-12 h-full">
       <h2 id="room-title" class="text-5xl mb-12 uppercase font-black tracking-widest">title</h2>
       <p id="room-setting" class="flex-grow text-gray-400 mb-12"></p>
       <p id="dialog-el" class="flex-grow"></p>
@@ -40,22 +40,12 @@
           <button id="puzzle-btn" class="btn btn-ghost btn-xs">Check answer</button>
         </div>
       </div>
-      <!-- <div id="litBtnsWrapper" class="p-4 container mx-auto max-w-2xl mt-6 ">
-        <button data-btn-nmb="1" id="litbtn1" class="w-24 h-24 m-2"></button>
-        <button data-btn-nmb="2" id="litbtn2" class="w-24 h-24 m-2"></button>
-        <button data-btn-nmb="3" id="litbtn3" class="w-24 h-24 m-2"></button>
-        <br>
-        <button data-btn-nmb="4" id="litbtn4" class="w-24 h-24 m-2"></button>
-        <button data-btn-nmb="5" id="litbtn5" class="w-24 h-24 m-2"></button>
-        <button data-btn-nmb="6" id="litbtn6" class="w-24 h-24 m-2"></button>
-      </div> -->
+     
       <!-- buttuns created in setScene in app.js -->
-      <div id="btn-container" class="flex space-x-4 mt-12">
+      <div id="btn-container" class="flex flex-col sm:flex-row gap-4 mt-12">
       </div>
     </div>
     
-    
-  </div>
   <footer class="mt-12 items-center p-4 footer text-neutral-content border-t border-opacity-50">
     <div class="items-center grid-flow-col"> 
       <p>GetOut © 2021 - All right reserved</p>
