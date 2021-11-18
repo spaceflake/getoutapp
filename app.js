@@ -21,6 +21,7 @@ function initApp() {
 
 window.onload = initApp
 
+/**loads elements */
 function loadElements() {
   formEl = document.getElementById("input-form")
   // litBtnsPuzzle = document.getElementById("litBtnsWrapper")
@@ -32,6 +33,7 @@ function loadElements() {
   puzzleText = document.querySelector("#puzzle-text")
 }
 
+/**Displays scene */
 function setScene(SCENE) {
   // set text on elements
   roomTitleEl.innerText = SCENE.title
@@ -49,7 +51,8 @@ function setScene(SCENE) {
     createBtn(SCENE)
   }
 }
-/*Cycles through scene gotos, creates buttons and adds clickevent */
+
+/** Cycles through scene gotos, creates buttons and adds clickevent */
 function createBtn(SCENE) {
   btnContainer.innerHTML = ""
   for (const goto of SCENE.goTos) {
@@ -83,7 +86,7 @@ function showElement(element) {
   element.classList.remove("hidden")
 }
 /**
- *
+ * Takes element and adds class hidden
  * @param {HTMLElement} element
  */
 function hideElement(element) {
@@ -94,9 +97,13 @@ function getRandomIndexNumber() {
   const indexNumber = Math.floor(Math.random() * 3) + 1
   return indexNumber
 }
+
+/** To hinder the user from entering username more
+ * @type {Boolean} */
 let isUserNameEntered = false
+
 /**
- *Takes the value from input, displays dialog, hides the form element and sets the next scene.
+ *Takes the value from input, displays dialog, multiple choices on input, hides the form element and sets the next scene on the right condition.
  * @param {EventTarget} event
  */
 function handleInput(event) {
@@ -140,12 +147,8 @@ function handleInput(event) {
     clearInput(inputValue)
   }
 
-  // dialogEl.innerHTML = `I'm <span class='text-blue-400'>${inputValue}</span>. I am here for the interview.
-  // <br> <p class='text-gray-400'>Mr.Black replies</p> - "Haha, an interview now. I don't have time for that." <br> <p class='text-gray-400'>He looks for a piece of paper and writes something down and hands it to you.<br> He says afterwards</p><br> - "Go to that address at that time. We'll see about that interview then. Now leave please."`
-  // userName = inputValue
-  // buildScenes()
-  // hideElement(formEl)
-  // setScene(SCENES[3])
+  // need below text somewhere
+  // He looks for a piece of paper and writes something down and hands it to you.<br> He says afterwards</p><br> - "Go to that address at that time. We'll see about that interview then. Now leave please."`
 }
 /**
  *Takes in string to be rendered, creates a paragraph element and styles it. Appends to div

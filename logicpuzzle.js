@@ -1,5 +1,5 @@
 // THE LOGIC PUZZLE
-
+/** @typedef() Puzzle*/
 const PUZZLES = [
   {
     text: "Five people were eating apples, A finished before B, but behind C. D finished before E, but behind B. What was the finishing order?",
@@ -22,7 +22,7 @@ const PUZZLES = [
 ]
 
 /**
- *
+ *Dislays a random puzzle with the param
  * @param {Number} i
  */
 function setLogicPuzzle(i) {

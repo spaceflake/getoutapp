@@ -5,7 +5,7 @@
 /** @type {String} Holds the player name. Updated in later scene with form */
 let userName = ""
 
-// /** @type {Scene[]} */
+/** @type {Scene[]} */
 let SCENES = []
 
 /** Build the scenes based on the state variables */
