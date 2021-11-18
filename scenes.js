@@ -39,7 +39,7 @@ function buildScenes() {
     },
     {
       title: "the interview",
-      sceneSetting: `Mr.Black finishing up whatever he was doing at the computer. Looks at you for a moment and asks - Who are you?`,
+      sceneSetting: `Mr.Black is finishing up whatever he was doing at the computer. He looks at you for a second and asks - Who are you?`,
       hasPuzzle: false,
       goTos: [
         {
@@ -55,7 +55,7 @@ function buildScenes() {
     },
     {
       title: "the interview",
-      sceneSetting: `Mr.Black finishing up whatever he was doing at the computer. Looks at you for a moment and asks - Who are you?`,
+      sceneSetting: `Not much else to be said then. Let's move on. Don't forget the note.`,
       hasPuzzle: false,
       goTos: [
         {
