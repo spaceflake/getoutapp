@@ -1,6 +1,7 @@
 /** @type {HTMLElement} */ let formEl
 // /** @type {HTMLElement} */ let litBtnsPuzzle
 /** @type {HTMLElement} */ let logicPuzzle
+/** @type {HTMLElement} */ let puzzleText
 /** @type {HTMLElement} */ let dialogEl
 /** @type {HTMLElement} */ let btnContainer
 /** @type {HTMLElement} */ let roomTitleEl
@@ -10,7 +11,7 @@
 function initApp() {
   loadElements()
   buildScenes()
-  setScene(SCENES[0])
+  setScene(SCENES[4])
   const form = document.querySelector("#input-form")
   form.addEventListener("submit", (event) => {
     event.preventDefault()
@@ -28,13 +29,10 @@ function loadElements() {
   btnContainer = document.getElementById("btn-container")
   roomTitleEl = document.getElementById("room-title")
   sceneSettingEl = document.getElementById("room-setting")
+  puzzleText = document.querySelector("#puzzle-text")
 }
 
 function setScene(SCENE) {
-  // get elements
-  const roomTitleEl = document.getElementById("room-title")
-  const sceneSettingEl = document.getElementById("room-setting")
-  const btnContainer = document.getElementById("btn-container")
   // set text on elements
   roomTitleEl.innerText = SCENE.title
   sceneSettingEl.innerText = SCENE.sceneSetting
