@@ -11,7 +11,7 @@
 function initApp() {
   loadElements()
   buildScenes()
-  setScene(SCENES[4])
+  setScene(SCENES[0])
   const form = document.querySelector("#input-form")
   form.addEventListener("submit", (event) => {
     event.preventDefault()
