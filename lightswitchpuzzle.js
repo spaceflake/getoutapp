@@ -13,25 +13,31 @@ const vectors = [
   [0, 0, 1, 0, 1, 1],
 ]
 
-// functions
+// Builds the puzzle
 function setLightSwitchPuzzle() {
+  setScene(SCENES[9])
   showElement(litBtnsPuzzle)
+  hideElement(btnContainer)
   setUpBtns()
   setColor()
 }
-
+// checks if puzzle is solved
 function checkEndCondition() {
   const isAllOn = lightSwitchStates.every((num) => num % 2)
   const isAllOff = lightSwitchStates.every((num) => num % 2 === 0)
 
   if (isAllOn) {
     alert("great all is on")
+    sceneSettingEl.innerText =
+      "The divice just vanished when all the buttons turned green. A mysterious door opens."
     showElement(btnContainer)
-    setScene(SCENES[9])
+    hideElement(litBtnsPuzzle)
   } else if (isAllOff) {
-    alert("great all is off")
+    sceneSettingEl.innerText =
+      "Great they are all red! But nothing happened. Maybe they need to be the other color?"
   } else {
-    console.log("keep playing")
+    sceneSettingEl.innerText =
+      "Keep tryin. Maybe they all needs to be the same color somehow?"
   }
 }
 
