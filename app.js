@@ -38,7 +38,6 @@ function loadElements() {
 
 /**Displays scene */
 function setScene(SCENE) {
-  buildScenes()
   // set text on elements
   roomTitleEl.innerText = SCENE.title
   sceneSettingEl.innerText = SCENE.sceneSetting
