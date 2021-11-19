@@ -17,5 +17,5 @@ Used TailwindCSS for styling with daisyUI plugin for some components.
 App is built to be scalable. Scenes and puzzles can be added.
 
 ---
-
-ps. more puzzles to come..
+Hoping to add more mysteries to Villa Enigma.
+with more puzzles to come..
