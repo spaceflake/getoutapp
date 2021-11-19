@@ -27,7 +27,6 @@ function checkEndCondition() {
   const isAllOff = lightSwitchStates.every((num) => num % 2 === 0)
 
   if (isAllOn) {
-    alert("great all is on")
     sceneSettingEl.innerText =
       "The divice just vanished when all the buttons turned green. A mysterious door opens."
     showElement(btnContainer)
