@@ -32,19 +32,18 @@ function setLogicPuzzle(puzzle) {
   const puzzleBtn = document
     .querySelector("#puzzle-btn")
     .addEventListener("click", checkInput)
-}
-
-function checkInput() {
-  let text
-  const puzzleAnswer = document.querySelector("#puzzle-answer")
-  let puzzleInput = document.querySelector("#puzzle-input")
-  text = puzzleInput.value.toUpperCase()
-  if (text === PUZZLES[i].answer) {
-    puzzleAnswer.textContent = text + " is correct"
-    PUZZLES[i].isAnswerCorrect = true
-    setScene(SCENES[8])
-    hideElement(logicPuzzle)
-  } else {
-    puzzleAnswer.textContent = text + " is not the right answer. Try again!"
+  function checkInput() {
+    let text
+    const puzzleAnswer = document.querySelector("#puzzle-answer")
+    let puzzleInput = document.querySelector("#puzzle-input")
+    text = puzzleInput.value.toUpperCase()
+    if (text === puzzle.answer) {
+      puzzleAnswer.textContent = text + " is correct"
+      puzzle.isAnswerCorrect = true
+      setScene(SCENES[8])
+      hideElement(logicPuzzle)
+    } else {
+      puzzleAnswer.textContent = text + " is not the right answer. Try again!"
+    }
   }
 }
