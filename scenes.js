@@ -89,7 +89,7 @@ function buildScenes() {
         },
         {
           btnTxt: "Enter door 2",
-          nextScene: 12,
+          nextScene: 9,
         },
         {
           btnTxt: "Enter door 3",
@@ -109,7 +109,7 @@ function buildScenes() {
         },
         {
           btnTxt: "Enter door 2",
-          nextScene: 12,
+          nextScene: 9,
         },
         {
           btnTxt: "Enter door 3",
@@ -151,12 +151,8 @@ function buildScenes() {
       hasPuzzle: true,
       goTos: [
         {
-          btnTxt: "go to device",
-          nextScene: 8,
-        },
-        {
-          btnTxt: "next",
-          nextScene: 9,
+          btnTxt: "Go through mysterious door",
+          nextScene: 10,
         },
       ],
       currentSceneIndex: 9,
