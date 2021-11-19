@@ -11,7 +11,6 @@
 /**Starts the app */
 function initApp() {
   loadElements()
-  // setLightSwitchPuzzle()
   buildScenes()
   setScene(SCENES[0])
   const form = document.querySelector("#input-form")
@@ -39,12 +38,16 @@ function loadElements() {
 /**Displays scene */
 function setScene(SCENE) {
   // set text on elements
+  setSceneText(SCENE)
+  // Create buttons
+  createBtn(SCENE)
+}
+
+function setSceneText(SCENE) {
+  roomTitleEl.innerText = ""
+  sceneSettingEl.innerText = ""
   roomTitleEl.innerText = SCENE.title
   sceneSettingEl.innerText = SCENE.sceneSetting
-  // hide puzzle elements by default
-  hideElement(dialogEl)
-  // hideElement(litBtnsPuzzle)
-  createBtn(SCENE)
 }
 
 /** Cycles through scene gotos, creates buttons and adds clickevent */
@@ -62,13 +65,10 @@ function createBtn(SCENE) {
         showElement(dialogEl)
         hideElement(btnContainer)
       } else if (goto.btnTxt === "Enter door 1") {
-        hideElement(logicPuzzle)
         setLogicPuzzle(PUZZLES[getRandomIndexNumber()])
-        showElement(logicPuzzle)
-        setScene(SCENES[7])
+      } else if (goto.btnTxt === "Enter door 2") {
+        setLightSwitchPuzzle()
       } else {
-        hideElement(dialogEl)
-        hideElement(formEl)
         hideElement(logicPuzzle)
         setScene(SCENES[nextSceneIndex])
       }
@@ -93,9 +93,9 @@ function showElement(element) {
 function hideElement(element) {
   element.classList.add("hidden")
 }
-/** returns a random number between 1 and 3 */
+/** returns a random number between 0 and 2 */
 function getRandomIndexNumber() {
-  const indexNumber = Math.floor(Math.random() * 3) + 1
+  const indexNumber = Math.floor(Math.random() * 3)
   return indexNumber
 }
 
