@@ -26,6 +26,7 @@ const PUZZLES = [
  * @param {Number} i
  */
 function setLogicPuzzle(puzzle) {
+  setScene(SCENES[7])
   showElement(logicPuzzle)
   puzzleText.innerText = ""
   puzzleText.innerText = puzzle.text
