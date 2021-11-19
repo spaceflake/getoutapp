@@ -104,7 +104,7 @@ function buildScenes() {
       hasPuzzle: false,
       goTos: [
         {
-          btnTxt: "The Office",
+          btnTxt: "Enter door 1",
           nextScene: 7,
         },
         {

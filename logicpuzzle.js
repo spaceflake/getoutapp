@@ -25,27 +25,26 @@ const PUZZLES = [
  *Dislays a random puzzle with the param
  * @param {Number} i
  */
-function setLogicPuzzle(i) {
+function setLogicPuzzle(puzzle) {
+  showElement(logicPuzzle)
   puzzleText.innerText = ""
-  puzzleText.innerText = PUZZLES[i].text
+  puzzleText.innerText = puzzle.text
   const puzzleBtn = document
     .querySelector("#puzzle-btn")
     .addEventListener("click", checkInput)
+}
 
-  showElement(logicPuzzle)
-
-  function checkInput() {
-    let text
-    const puzzleAnswer = document.querySelector("#puzzle-answer")
-    let puzzleInput = document.querySelector("#puzzle-input")
-    text = puzzleInput.value.toUpperCase()
-    if (text === PUZZLES[i].answer) {
-      puzzleAnswer.textContent = text + " is correct"
-      PUZZLES[i].isAnswerCorrect = true
-      setScene(SCENES[8])
-      hideElement(logicPuzzle)
-    } else {
-      puzzleAnswer.textContent = text + " is not the right answer. Try again!"
-    }
+function checkInput() {
+  let text
+  const puzzleAnswer = document.querySelector("#puzzle-answer")
+  let puzzleInput = document.querySelector("#puzzle-input")
+  text = puzzleInput.value.toUpperCase()
+  if (text === PUZZLES[i].answer) {
+    puzzleAnswer.textContent = text + " is correct"
+    PUZZLES[i].isAnswerCorrect = true
+    setScene(SCENES[8])
+    hideElement(logicPuzzle)
+  } else {
+    puzzleAnswer.textContent = text + " is not the right answer. Try again!"
   }
 }

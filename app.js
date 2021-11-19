@@ -1,15 +1,17 @@
 /** @type {HTMLElement} */ let formEl
-// /** @type {HTMLElement} */ let litBtnsPuzzle
+/** @type {HTMLElement} */ let litBtnsPuzzle
 /** @type {HTMLElement} */ let logicPuzzle
 /** @type {HTMLElement} */ let puzzleText
 /** @type {HTMLElement} */ let dialogEl
 /** @type {HTMLElement} */ let btnContainer
 /** @type {HTMLElement} */ let roomTitleEl
 /** @type {HTMLElement} */ let sceneSettingEl
+/** @type {HTMLElement} */ let litbtns
 
 /**Starts the app */
 function initApp() {
   loadElements()
+  // setLightSwitchPuzzle()
   buildScenes()
   setScene(SCENES[0])
   const form = document.querySelector("#input-form")
@@ -24,13 +26,14 @@ window.onload = initApp
 /**loads elements */
 function loadElements() {
   formEl = document.getElementById("input-form")
-  // litBtnsPuzzle = document.getElementById("litBtnsWrapper")
+  litBtnsPuzzle = document.getElementById("litBtnsWrapper")
   logicPuzzle = document.getElementById("logic-puzzle")
   dialogEl = document.querySelector("#dialog-el")
   btnContainer = document.getElementById("btn-container")
   roomTitleEl = document.getElementById("room-title")
   sceneSettingEl = document.getElementById("room-setting")
   puzzleText = document.querySelector("#puzzle-text")
+  litbtns = document.querySelectorAll("button[id^=litbtn]")
 }
 
 /**Displays scene */
@@ -39,17 +42,9 @@ function setScene(SCENE) {
   roomTitleEl.innerText = SCENE.title
   sceneSettingEl.innerText = SCENE.sceneSetting
   // hide puzzle elements by default
-  hideElement(logicPuzzle)
   hideElement(dialogEl)
   // hideElement(litBtnsPuzzle)
-
-  // check if scene has puzzle
-  if (SCENE.hasPuzzle) {
-    setLogicPuzzle(getRandomIndexNumber())
-    createBtn(SCENE)
-  } else {
-    createBtn(SCENE)
-  }
+  createBtn(SCENE)
 }
 
 /** Cycles through scene gotos, creates buttons and adds clickevent */
@@ -66,9 +61,15 @@ function createBtn(SCENE) {
         showElement(formEl)
         showElement(dialogEl)
         hideElement(btnContainer)
+      } else if (goto.btnTxt === "Enter door 1") {
+        hideElement(logicPuzzle)
+        setLogicPuzzle(PUZZLES[getRandomIndexNumber()])
+        showElement(logicPuzzle)
+        setScene(SCENES[7])
       } else {
         hideElement(dialogEl)
         hideElement(formEl)
+        hideElement(logicPuzzle)
         setScene(SCENES[nextSceneIndex])
       }
     }
@@ -127,12 +128,20 @@ function handleInput(event) {
       )
     }, 1000)
     clearInput(inputValue)
-    changePlaceholder(
-      inputPlaceholder,
-      "type '1' to say why or '2' for more....if you want to skip type 'skip'"
-    )
+    changePlaceholder(inputPlaceholder, "try 'why', or 'skip' to leave")
     isUserNameEntered = true
     buildScenes()
+  } else if (inputValue.value === "why") {
+    renderText(`But I did have an appointment today`, dialogEl, userStyle)
+    setTimeout(function () {
+      renderText(
+        "I'm writing down an address and a time on this note. Go to that address at that time. We'll see about that interview then. Now leave please.",
+        dialogEl,
+        bossStyle
+      )
+    }, 1000)
+    clearInput(inputValue)
+    changePlaceholder(inputPlaceholder, "try 'skip' to leave")
   } else if (inputValue.value === "skip") {
     buildScenes()
     hideElement(formEl)
@@ -146,10 +155,8 @@ function handleInput(event) {
     }, 1000)
     clearInput(inputValue)
   }
-
-  // need below text somewhere
-  // He looks for a piece of paper and writes something down and hands it to you.<br> He says afterwards</p><br> - "Go to that address at that time. We'll see about that interview then. Now leave please."`
 }
+
 /**
  *Takes in string to be rendered, creates a paragraph element and styles it. Appends to div
  * @param {String} text
