@@ -10,6 +10,7 @@
   <script src="./app.js"></script>
   <script src="./scenes.js"></script>
   <script src="./logicpuzzle.js"></script>
+  <script src="./lightswitchpuzzle.js"></script>
 </head>
 <body class="h-screen">
   
@@ -39,7 +40,15 @@
           <button id="puzzle-btn" class="btn btn-ghost btn-xs">Check answer</button>
         </div>
       </div>
-     
+      <div id="litBtnsWrapper" class="p-4 container mx-auto max-w-2xl mt-6 hidden">
+        <button data-btn-nmb="1" id="litbtn1" class="w-24 h-24 m-2"></button>
+        <button data-btn-nmb="2" id="litbtn2" class="w-24 h-24 m-2"></button>
+        <button data-btn-nmb="3" id="litbtn3" class="w-24 h-24 m-2"></button>
+        <br>
+        <button data-btn-nmb="4" id="litbtn4" class="w-24 h-24 m-2"></button>
+        <button data-btn-nmb="5" id="litbtn5" class="w-24 h-24 m-2"></button>
+        <button data-btn-nmb="6" id="litbtn6" class="w-24 h-24 m-2"></button>
+      </div>
       <!-- buttons created in setScene in app.js -->
       <div id="btn-container" class="flex flex-col sm:flex-row gap-4 mt-12">
       </div>
