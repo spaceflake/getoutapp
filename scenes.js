@@ -126,7 +126,7 @@ function buildScenes() {
       goTos: [
         {
           btnTxt: "Back to Hallway",
-          nextScene: 6,
+          nextScene: 5,
         },
       ],
       currentSceneIndex: 7,
